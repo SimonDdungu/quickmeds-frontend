@@ -100,7 +100,7 @@ const SideBarLinks = ({link_name, link, icon, isActive, options}: SidebarLink) =
 const SideBar = () => {
   return (
     <div className='px-4 py-10 max-w-fit shadow min-h-screen bg-white hidden lg:block'>
-        <div className='flex flex-col items-center mb-8 cursor-pointer'>
+        <div className='flex flex-col items-center mb-8 cursor-default'>
             <div className='mb-4 overflow-hidden rounded-lg border-3 border-white md:size-25 xl:size-30 shadow'>
                 <Image src={Logo} alt='Simon Chainers' className='w-full h-full'/>
             </div>

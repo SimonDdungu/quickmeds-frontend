@@ -15,11 +15,11 @@ const NavBar = () => {
         </div>
 
         <div>
-            <div className='flex items-center gap-x-4 pl-4 rounded-full bg-blue-50'>
-            <h6 className='text-sm'>Simon Chainbers</h6>
-            <div className='rounded-full size-10 overflow-hidden'>
-                <Image src={Profile_Pic} alt='Simon Chainbers' className='w-full h-full'/>
-            </div>
+            <div className='flex items-center gap-x-4 pl-4 rounded-full bg-blue-50 cursor-pointer hover:bg-blue-100 transition-colors'>
+                <h6 className='text-sm'>Simon Chainbers</h6>
+                <div className='rounded-full size-10 overflow-hidden'>
+                    <Image src={Profile_Pic} alt='Simon Chainbers' className='w-full h-full'/>
+                </div>
             </div>
         </div>
     </div>
