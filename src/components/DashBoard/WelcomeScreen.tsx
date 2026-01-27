@@ -2,7 +2,6 @@ import React from 'react'
 import DashBoardVector from "@/assets/dashboard/quickmeds-dash-1.jpg"
 import Image from 'next/image'
 import KpiCard from './KPICard'
-import POS_icon from "@/assets/Icons/pos.png"
 import Cash from "@/assets/Icons/cash-1.png"
 import Medicine from "@/assets/Icons/medicine-2.png"
 import Expired from "@/assets/Icons/poison.png"
