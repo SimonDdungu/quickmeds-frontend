@@ -3,6 +3,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Pencil } from 'lucide-react'
 import { ManufacturersType } from '@/interfaces'
+import { ActionsButton } from './ActionsButton'
 
 export const columns: ColumnDef<ManufacturersType>[] = [
   {
@@ -37,14 +38,9 @@ export const columns: ColumnDef<ManufacturersType>[] = [
     id: 'action',
     header: 'Action',
     cell: ({ row }) => (
-      <div className="flex items-center justify-center">
-        <button
-          onClick={() => console.log('Edit:', row.original)}
-          className="text-blue-600 hover:text-blue-800 cursor-pointer"
-        >
-          <Pencil size={18} />
-        </button>
-      </div>
+          <div className="flex justify-center">
+            <ActionsButton rowData={row.original} />
+          </div>
     ),
   },
 ]
