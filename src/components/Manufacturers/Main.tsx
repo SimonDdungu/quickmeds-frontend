@@ -1,5 +1,5 @@
 import React from 'react'
-import QuickActions from './QuickActions'
+import {AddManufacturesDialog} from './QuickActions'
 import DataTable from './DataTable'
 import {data} from "./data"
 import AddManufacturers from './AddManufacturers'
@@ -9,7 +9,7 @@ const Main = () => {
     <div>
         <div className="p-6">
             <div className='flex mb-5'>
-                <QuickActions />
+                <AddManufacturesDialog />
             </div>
             <DataTable data={data} />
         </div>
