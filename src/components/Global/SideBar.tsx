@@ -17,7 +17,7 @@ import Admin_icon from "@/assets/Icons/admin-2.png"
 import Settings_icon from "@/assets/Icons/settings-2.png"
 
 const SideBarNav: SidebarLink[]  = [
-    {link_name: "Dashboard", link: "#", icon: Dashboard_icon, isActive: true},
+    {link_name: "Dashboard", link: "/", icon: Dashboard_icon, isActive: true},
     {link_name: "Point Of Sale", icon: POS_icon, 
         options: [
             {link_name: "Sale", link: "#"},
@@ -27,7 +27,7 @@ const SideBarNav: SidebarLink[]  = [
     {link_name: "Inventory", link: "#", icon: Inventory_icon},
     {link_name: "Medicine", link: "#", icon: Medicine_icon},
     {link_name: "Wholesalers", link: "#", icon: Wholesale_icon},
-    {link_name: "Manufacturers", link: "#", icon: Manufacturers_icon},
+    {link_name: "Manufacturers", link: "/manufacturers", icon: Manufacturers_icon},
     {link_name: "Reports", link: "#", icon: Reports_icon},
     {link_name: "Administration", icon: Admin_icon,
         options: [

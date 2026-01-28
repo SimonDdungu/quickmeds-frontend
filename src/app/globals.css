@@ -1,8 +1,17 @@
 @import "tailwindcss";
+/* @layer theme, base, primereact, components, utilities; 
+@import 'primereact/resources/themes/lara-light-green/theme.css' layer(primereact);
+@import 'primereact/resources/primereact.min.css' layer(primereact);
+
+@import "tailwindcss/theme.css" layer(theme); 
+@import "tailwindcss/preflight.css" layer(base); 
+@import "tailwindcss/utilities.css" layer(utilities);
+ */
+
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #362727;
 
   --light-purple: #dfdcf6;
   --light-green: #cdffcf;

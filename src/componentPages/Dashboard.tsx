@@ -1,5 +1,5 @@
 import React from 'react'
-import {WelcomeScreen } from '@/components/DashBoard'
+import {TopMedicineTable, WelcomeScreen } from '@/components/DashBoard'
 import { DashHeading } from '@/components/Global'
 
 const Dashboard = () => {
@@ -7,6 +7,8 @@ const Dashboard = () => {
     <section>
       <DashHeading Title='Dashboard' />
       <WelcomeScreen />
+
+      <TopMedicineTable />
 
       <p className='text-center mt-20'>
         {"Work in progress :)"}
