@@ -27,20 +27,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased  `}
-      >
-        <PrimeReactProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased  `}>
           <div className="flex min-h-screen">
               <SideBar />
-              <main className="flex-1 bg-slate-100">
+              <main className="ml-58 flex-1 bg-slate-100">
                 <NavBar />
                 <div className="p-6">
                   {children}
                 </div>
               </main>
           </div>
-        </PrimeReactProvider>
       </body>
     </html>
   );
