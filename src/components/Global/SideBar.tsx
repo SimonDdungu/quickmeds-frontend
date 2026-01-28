@@ -55,7 +55,7 @@ const SideBarLinks = ({link_name, link, icon, isActive, options}: SidebarLink) =
                         </div>
 
                     {link ? (
-                    <Link href={link} className="lg:text-xs m xl:text-sm capitalize flex-1">
+                    <Link href={link} className="lg:text-xs m xl:text-sm capitalize flex-1 w-full">
                         {link_name}
                     </Link>
                     ) : (

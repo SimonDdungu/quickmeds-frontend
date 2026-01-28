@@ -2,6 +2,7 @@ import React from 'react'
 import QuickActions from './QuickActions'
 import DataTable from './DataTable'
 import {data} from "./data"
+import AddManufacturers from './AddManufacturers'
 
 const Main = () => {
   return (
