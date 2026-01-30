@@ -11,6 +11,7 @@ export function useManufacturers(params: ManufacturerSearchQuery) {
       const res = await api.get<PaginatedResponse<ManufacturersType>>(`${inventoryAPI}/manufacturers/`, {params})
       return res.data          
     },
+    staleTime: 1000 * 60 * 60,
   })
 }
 
@@ -21,6 +22,7 @@ export function useManufacturer(id: number) {
       return res.data
     },
     enabled: !!id,
+    staleTime: 1000 * 60 * 60,
   })
 }
 

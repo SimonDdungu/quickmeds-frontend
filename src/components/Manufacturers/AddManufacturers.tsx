@@ -6,11 +6,12 @@ import { manufacturerSchema, ManufacturerFormData } from "./schema/manufacturerS
 import { ContactField, InputField } from "../Global/Form"
 import { useAddManufacturer } from "@/hooks/inventory/useManufacturers"
 import { ManufacturersType } from "@/interfaces"
+import CountryDropDown from "../Global/Form/CountryDropDown"
 
 interface AddManufacturerFormProps {
   defaultValues?: Partial<ManufacturerFormData>
   onCancel?: () => void
-  onSave?: (data: ManufacturersType) => void
+  onSave?: () => void
 }
 
 export default function AddManufacturers({ defaultValues, onCancel, onSave }: AddManufacturerFormProps) {
@@ -23,15 +24,13 @@ export default function AddManufacturers({ defaultValues, onCancel, onSave }: Ad
 
   const onSubmit = (data: ManufacturersType) => {
     addManufacturer.mutate(data);
-    if (onSave){
-        onSave(data)
-    }
+    onSave
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 w-full max-w-md mx-auto px-4 py-8 bg-white border rounded-lg shadow-sm ">
       <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} />
-      <InputField label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
+      <CountryDropDown label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
       <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
       <ContactField label="Contact" name="contact" placeholder="Enter contact number" register={register} errors={errors} />
       <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />

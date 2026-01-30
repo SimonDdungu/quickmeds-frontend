@@ -1,6 +1,6 @@
 'use client'
 
-import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form"
+import { FieldErrors } from "react-hook-form"
 
 interface FormInputProps {
   label: string

@@ -22,11 +22,6 @@ interface DeleteManufacturesDialogProps {
 export function AddManufacturesDialog() {
   const [open, setOpen] = useState(false)
 
-  const handleSave = (data: any) => {
-    console.log("Manufacturer saved:", data)
-    setOpen(false) 
-  }
-
   return (
     <div className='ml-auto'>
       <button className='cursor-pointer block w-max  px-5 py-2 rounded-lg text-white bg-blue-800 text-sm hover:bg-blue-900 transition-colors'
@@ -42,7 +37,7 @@ export function AddManufacturesDialog() {
 
           <AddManufacturers
             onCancel={() => setOpen(false)}
-            onSave={handleSave}
+            onSave={() => setOpen(false)}
           />
         </DialogContent>
       </Dialog>
