@@ -1,4 +1,5 @@
 import { DashHeading } from '@/components/Global'
+import LoadingSpinner from '@/components/Global/LoadingSpinner'
 import { Main } from '@/components/Manufacturers'
 import React from 'react'
 

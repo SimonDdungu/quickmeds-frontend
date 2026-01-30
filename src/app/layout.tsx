@@ -4,6 +4,7 @@ import { PrimeReactProvider } from 'primereact/api';
 import { Providers } from "./provider";
 import 'primeicons/primeicons.css';
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner"
 import { NavBar, SideBar } from "@/components/Global";
 
 const geistSans = Geist({
@@ -40,6 +41,7 @@ export default function RootLayout({
                   {children}
                 </div>
               </main>
+              <Toaster position="top-right" richColors/>
           </div>
 
         </Providers>

@@ -30,7 +30,8 @@ export function useAddManufacturer() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: ManufacturersType) => {const res = await api.post<ManufacturersType>(`${inventoryAPI}/manufacturers/`, data)
+    mutationFn: async (data: ManufacturersType) => {
+      const res = await api.post<ManufacturersType>(`${inventoryAPI}/manufacturers/`, data)
       return res.data
     },
     onSuccess: (data) => {
