@@ -5,13 +5,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { manufacturerSchema, ManufacturerFormData } from "./schema/manufacturerSchema"
 import { InputField } from "../Global/Form"
 
-interface AddManufacturerFormProps {
+interface EditManufacturerFormProps {
   defaultValues?: Partial<ManufacturerFormData>
   onCancel?: () => void
   onSave?: (data: ManufacturerFormData) => void
 }
 
-export default function EditManufacturers({ defaultValues, onCancel, onSave }: AddManufacturerFormProps) {
+export default function EditManufacturers({ defaultValues, onCancel, onSave }: EditManufacturerFormProps) {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ManufacturerFormData>({
     defaultValues,
     resolver: zodResolver(manufacturerSchema),
@@ -33,10 +33,10 @@ export default function EditManufacturers({ defaultValues, onCancel, onSave }: A
       <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />
 
       <div className="flex justify-end gap-2 mt-4">
-        <button type="button" onClick={onCancel} className="px-5 py-1 cursor-pointer rounded-lg border bg-gray-100 hover:bg-gray-200 text-sm">
+        <button type="button" onClick={onCancel} className="px-5 py-1 cursor-pointer rounded-lg border bg-gray-100 hover:bg-gray-200 text-sm transition-colors">
           Cancel
         </button>
-        <button type="submit" disabled={isSubmitting} className="px-5 py-1 cursor-pointer rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm">
+        <button type="submit" disabled={isSubmitting} className="px-5 py-1 cursor-pointer rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm transition-colors">
           Save
         </button>
       </div>

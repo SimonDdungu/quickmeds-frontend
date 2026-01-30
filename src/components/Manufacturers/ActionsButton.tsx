@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover"
 import { ManufacturersType } from "@/interfaces"
 import { useState } from "react"
-import { EditManufacturesDialog } from "./QuickActions"
+import { DeleteManufacturesDialog, EditManufacturesDialog } from "./QuickActions"
 
 interface ActionMenuProps {
   rowData: ManufacturersType
@@ -14,6 +14,7 @@ interface ActionMenuProps {
 
 export const ActionsButton = ({ rowData }: ActionMenuProps) => {
     const [editOpen, setEditOpen] = useState(false)
+    const [deleteOpen, setDeleteOpen] = useState(false)
     const [selectedManufacturer, setSelectedManufacturer] = useState<ManufacturersType | null>(null)
 return (
     <div>
@@ -36,13 +37,14 @@ return (
 
                 <button
                 className="text-sm text-red-600 hover:bg-red-50 rounded px-2 py-1 text-left cursor-pointer"
-                onClick={() => {console.log("Delete:", rowData)}}>
+                onClick={() => {setDeleteOpen(true); setSelectedManufacturer(rowData);}}>
                     Delete
                 </button>
             </PopoverContent>
         </Popover>
 
          <EditManufacturesDialog open={editOpen} setOpen={setEditOpen}  manufacturer={selectedManufacturer}/>
+         <DeleteManufacturesDialog open={deleteOpen} setOpen={setDeleteOpen}  manufacturer={selectedManufacturer}/>
     </div>
     )
 }

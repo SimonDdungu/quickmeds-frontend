@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { PrimeReactProvider } from 'primereact/api';
+import { Providers } from "./provider";
 import 'primeicons/primeicons.css';
 import "./globals.css";
 import { NavBar, SideBar } from "@/components/Global";
@@ -28,6 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased  `}>
+        <Providers>
+
+        
           <div className="flex min-h-screen">
               <SideBar />
               <main className="ml-58 flex-1 bg-slate-100">
@@ -37,6 +41,8 @@ export default function RootLayout({
                 </div>
               </main>
           </div>
+
+        </Providers>
       </body>
     </html>
   );

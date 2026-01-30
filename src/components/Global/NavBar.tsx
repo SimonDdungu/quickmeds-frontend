@@ -33,7 +33,7 @@ const DateAndTime = () => {
 
 const NavBar = () => {
   return (
-    <div className='bg-white shadow-xs flex items-center justify-between py-2 px-5'>
+    <div className='bg-white shadow-xs flex items-center justify-between py-2 px-5 z-9999'>
         <div className='flex items-center gap-x-2'>
             <div className='size-10'>
                 <Image src={Logo} alt='QuickMeds Logo' className='w-full h-full object-contain'/>

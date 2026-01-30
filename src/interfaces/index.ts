@@ -8,6 +8,14 @@ export interface SidebarLink {
   options?: {link_name: string, link: string}[]
 }
 
+export interface PaginatedResponse<T> {
+  count: number
+  next: string | null
+  previous: string | null
+  results: T[]
+}
+
+
 export type TopMedicineDataType = {
     id: number,
     name: string,
@@ -17,11 +25,21 @@ export type TopMedicineDataType = {
 }
 
 export type ManufacturersType = {
+  id?: string
   name: string
-  country: string
-  email: string
-  contact: string
-  address: string
-  created_at: string
-  updated_at: string
+  country?: string
+  email?: string
+  contact?: string
+  address?: string
+  created_at?: string
+  updated_at?: string
 }
+
+export type ManufacturerSearchQuery = {
+  page?: number
+  name?: string
+  country?: string
+  email?: string
+  contact?: string
+}
+

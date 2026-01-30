@@ -1,5 +1,5 @@
 import { ManufacturersType } from "@/interfaces"
-export const data: ManufacturersType[] = [
+export const ManufacturesDummydata: any = [
   {
     "name": "Apex BioPharma Solutions",
     "country": "United States",
