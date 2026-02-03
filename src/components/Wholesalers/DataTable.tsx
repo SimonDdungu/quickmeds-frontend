@@ -1,22 +1,18 @@
 'use client'
 
-import {flexRender,getCoreRowModel, getPaginationRowModel, useReactTable, getSortedRowModel, SortingState, PaginationState} from '@tanstack/react-table'
+import { PaginationState} from '@tanstack/react-table'
 import {columns} from './Columns'
-import { ManufacturerSearchQuery, ManufacturersType } from '@/interfaces'
+import { ManufacturerSearchQuery, ManufacturersType, WholesalerType } from '@/interfaces'
 import {ManufacturesDummydata} from "./data"
 import { useState } from 'react'
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import { useManufacturers } from '@/hooks/inventory/useManufacturers'
-import { AddManufacturesDialog } from './QuickActions'
+import { AddWholesalerDialog } from './QuickActions'
 import TextSearchFields from './SearchFields'
 import { Search, XCircle } from 'lucide-react'
-import LoadingSpinner from '../Global/LoadingSpinner'
+import { useWholesalers } from '@/hooks/inventory/useWholesalers'
 
 import Datatable from '../Global/Datatable'
 
-export default function ManufacturerTable() {
-  const [sorting, setSorting] = useState<SortingState>([])
-  const [page, setPage] = useState(1)
+export default function WholesalerTable() {
   const [name, setName] = useState<string | undefined>(undefined)
   const [country, setCountry] = useState<string | undefined>(undefined)
   const [email, setEmail] = useState<string | undefined>(undefined)
@@ -24,9 +20,9 @@ export default function ManufacturerTable() {
   const [searchQuery, setSearchQuery] = useState<ManufacturerSearchQuery>({name: undefined, country: undefined, email: undefined, contact: undefined});
   const [pagination, setPagination] = useState<PaginationState>({pageIndex: 0, pageSize: 10})
 
-  const { data, isLoading, isError } = useManufacturers({page: pagination.pageIndex + 1, ...searchQuery})
-  const manufacturers: ManufacturersType[] = data?.results ?? ManufacturesDummydata
-  const totalItems = data?.count ?? ManufacturesDummydata.length
+  const { data, isLoading, isError } = useWholesalers({page: pagination.pageIndex + 1, ...searchQuery})
+  const wholesalers: WholesalerType[] = data?.results ?? ManufacturesDummydata
+  const totalItems = data?.count ?? 0
 
   const clearSearchQueries = () => {
     setName(undefined)
@@ -53,10 +49,10 @@ export default function ManufacturerTable() {
                   <XCircle size={22}/>
                 </button>
               </form>
-                <AddManufacturesDialog />
+                <AddWholesalerDialog />
             </div>
             
-          <Datatable data={manufacturers} columns={columns} isLoading={isLoading} pagination={pagination} setPagination={setPagination} totalItems={totalItems}/>
+          <Datatable data={wholesalers} columns={columns} isLoading={isLoading} pagination={pagination} setPagination={setPagination} totalItems={totalItems}/>
 
     </div>
   )

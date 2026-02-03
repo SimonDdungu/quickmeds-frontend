@@ -45,7 +45,7 @@ export function useUpdateManufacturer() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: ManufacturersType) => {const res = await api.put<ManufacturersType>(`${inventoryAPI}/manufacturers/${data.id}`, data)
+    mutationFn: async (data: ManufacturersType) => {const res = await api.put<ManufacturersType>(`${inventoryAPI}/manufacturers/${data.id}/`, data)
       return res.data
     },
     onSuccess: (data) => {
@@ -59,7 +59,7 @@ export function useDeleteManufacturer() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (id: number) => {const res = await api.delete(`${inventoryAPI}/manufacturers/${id}`)
+    mutationFn: async (id: string) => {const res = await api.delete(`${inventoryAPI}/manufacturers/${id}/`)
       return res.data
     },
    onSuccess: (_, id) => {

@@ -43,3 +43,21 @@ export type ManufacturerSearchQuery = {
   contact?: string
 }
 
+export type WholesalerType = {
+  id?: string
+  name: string
+  country?: string
+  email?: string
+  contact?: string
+  address?: string
+  created_at?: string
+  updated_at?: string
+}
+
+export type WholesalerSearchQuery = {
+  page?: number
+  name?: string
+  country?: string
+  email?: string
+  contact?: string
+}

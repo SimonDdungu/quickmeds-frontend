@@ -26,7 +26,7 @@ const SideBarNav: SidebarLink[]  = [
     },
     {link_name: "Inventory", link: "#", icon: Inventory_icon},
     {link_name: "Medicine", link: "#", icon: Medicine_icon},
-    {link_name: "Wholesalers", link: "#", icon: Wholesale_icon},
+    {link_name: "Wholesalers", link: "/wholesalers", icon: Wholesale_icon},
     {link_name: "Manufacturers", link: "/manufacturers", icon: Manufacturers_icon},
     {link_name: "Reports", link: "#", icon: Reports_icon},
     {link_name: "Administration", icon: Admin_icon,

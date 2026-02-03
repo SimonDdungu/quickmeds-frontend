@@ -4,36 +4,40 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { manufacturerSchema, ManufacturerFormData } from "../../schema/manufacturerSchema"
 import { ContactField, InputField } from "../Global/Form"
-import { useAddManufacturer } from "@/hooks/inventory/useManufacturers"
-import { ManufacturersType } from "@/interfaces"
-import CountryDropDown from "../Global/Form/CountryDropDown"
-import LoadingSpinner from "../Global/LoadingSpinner"
 import { useState } from "react"
+import { useUpdateManufacturer } from "@/hooks/inventory/useManufacturers"
+import { ManufacturersType, WholesalerType } from "@/interfaces"
 import { toast } from "sonner"
+import LoadingSpinner from "../Global/LoadingSpinner"
+import CountryDropDown from "../Global/Form/CountryDropDown"
+import { WholesalerFormData, wholesalerSchema } from "@/schema/wholesalerSchema"
+import { useUpdateWholesaler } from "@/hooks/inventory/useWholesalers"
 
-interface AddManufacturerFormProps {
-  defaultValues?: Partial<ManufacturerFormData>
-  onCancel?: () => void
-  onSave?: () => void
+interface EditWholesalerFormProps {
+  defaultValues?: Partial<WholesalerType>
+  onCancel: () => void
+  onSave: () => void
 }
 
-export default function AddManufacturers({ defaultValues, onCancel, onSave }: AddManufacturerFormProps) {
+export default function EditWholesalers({ defaultValues, onCancel, onSave }: EditWholesalerFormProps) {
   const [ErrorMessage, ShowErrorMessage] = useState<boolean>(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<ManufacturerFormData>({
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<WholesalerFormData>({
     defaultValues,
-    resolver: zodResolver(manufacturerSchema),
+    resolver: zodResolver(wholesalerSchema),
   })
 
-  const addManufacturer = useAddManufacturer();
+  const editWholesaler = useUpdateWholesaler();
 
-const onSubmit = async (data: ManufacturersType) => {
-    addManufacturer.mutate(data, {
+const onSubmit = async (data: WholesalerType) => {
+  const updatedData = { ...data, id: defaultValues?.id }
+  console.log("Data being updated: ", updatedData)
+    editWholesaler.mutate(updatedData, {
         onSuccess: () => {
-          toast("Manufacturer added successfully")
-           onSave
+          toast.success("Wholesaler updated successfully")
+           onSave()
           },
         onError: (error) => {
-          toast.error("Manufacturer was not added!")
+          toast.error("Wholesaler was not updated!")
           ShowErrorMessage(true)
         }
   }
@@ -42,7 +46,7 @@ const onSubmit = async (data: ManufacturersType) => {
 
   return (
       <form onSubmit={handleSubmit(onSubmit)} className="relative overflow-hidden flex flex-col gap-4 w-full max-w-md mx-auto px-4 py-8 bg-white border rounded-lg shadow-sm ">
-        {addManufacturer.isPending && <LoadingSpinner />}
+        {editWholesaler.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
         <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} />
         <CountryDropDown label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
@@ -54,7 +58,7 @@ const onSubmit = async (data: ManufacturersType) => {
           <button type="button" onClick={onCancel} className="px-5 py-1 cursor-pointer rounded-lg border bg-gray-100 hover:bg-gray-200 text-sm transition-colors">
             Cancel
           </button>
-          <button type="submit" disabled={addManufacturer.isPending} className="px-5 py-1 cursor-pointer rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm transition-colors">
+          <button type="submit" disabled={editWholesaler.isPending} className="px-5 py-1 cursor-pointer rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm transition-colors">
             Save
           </button>
         </div>

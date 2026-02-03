@@ -1,6 +1,6 @@
 import React from 'react'
 import {AddManufacturesDialog} from './QuickActions'
-import DataTable from './DataTable'
+import ManufacturerTable from './DataTable'
 
 import AddManufacturers from './AddManufacturers'
 import SearchFields from './SearchFields'
@@ -11,7 +11,7 @@ const Main = () => {
   return (
     <div>
         <div>
-            <DataTable />
+            <ManufacturerTable />
         </div>
     </div>
   )
