@@ -15,10 +15,10 @@ export function useManufacturers(params: ManufacturerSearchQuery) {
   })
 }
 
-export function useManufacturer(id: number) {
+export function useManufacturer(id: string) {
   return useQuery({
     queryKey: ["manufacturer", id],
-    queryFn: async () => {const res = await api.get<ManufacturersType[]>(`${inventoryAPI}/manufacturers/${id}/`)
+    queryFn: async () => {const res = await api.get<ManufacturersType>(`${inventoryAPI}/manufacturers/${id}/`)
       return res.data
     },
     enabled: !!id,

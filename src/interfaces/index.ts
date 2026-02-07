@@ -61,3 +61,41 @@ export type WholesalerSearchQuery = {
   email?: string
   contact?: string
 }
+
+export type MedicineType = {
+  id?: string
+  name: string
+  generic_name?: string
+  dosage_form?: string
+  strength?: number
+  strength_unit?: string
+  description?: string
+  manufacturer_detail: ManufacturersType
+  image?: StaticImageData
+  created_at?: string
+  updated_at?: string
+}
+
+export type CreateMedicineType = {
+  id?: string
+  name: string
+  generic_name?: string
+  dosage_form?: string
+  strength?: number
+  strength_unit?: string
+  description?: string
+  manufacturer: string
+  image?: File
+}
+
+export type MedicineSearchQuery = {
+  page?: number
+  name?: string
+  generic_name?: string
+  dosage_form?: string
+  strength?: number
+  strength_min?: number
+  strength_max?: number
+  strength_unit?: string
+  manufacturer?: string
+}

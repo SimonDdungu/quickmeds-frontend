@@ -1,0 +1,83 @@
+"use client"
+import React, { useState } from 'react';
+import { Controller, Control } from "react-hook-form";
+import Select from 'react-select';
+
+interface DropdownOption {
+  label: string;
+  value: string;
+}
+
+interface DropdownList {
+  name: string;
+  control: Control<any>;
+  options: DropdownOption[];
+  //value: DropdownOption | null;
+  isLoading?: boolean;
+  placeholder?: string;
+  onSearch: (inputValue: string) => void;     // Fires every time the user types in the dropdown
+  onSelect: (id: string | null) => void;   // Fires when the user clicks an option
+}
+
+// import {Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList} from "@/components/ui/combobox"
+
+// interface Dropdown {
+//   placeholder: string
+//   empty: string
+//   List: string[]
+//   value?: string | null     // selected value
+//   onChange?: (value: string | null) => void     // user clicks/selects → updates selected value
+//   onInputChange?: (val: string) => void   // user types -> triggers backend fetch
+// }
+
+// export function Dropdown({placeholder, empty, List, value, onChange, onInputChange}: Dropdown) {
+  
+//   return (
+//     <Combobox items={List}  value={value} onValueChange={(val) => {onChange?.(val); onInputChange?.("")}}>
+//       <ComboboxInput placeholder={placeholder} onChange={(e) => onInputChange?.(e.target.value)}/>
+//       <ComboboxContent>
+//         <ComboboxEmpty>{empty}</ComboboxEmpty>
+//         <ComboboxList>
+//           {(item) => (
+//             <ComboboxItem key={item} value={item}>
+//               {item}
+//             </ComboboxItem>
+//           )}
+//         </ComboboxList>
+//       </ComboboxContent>
+//     </Combobox>
+//   )
+// }
+
+export default function Dropdown({options, name, control, onSelect,  onSearch,  isLoading = false, placeholder = "Search..."}: DropdownList) {
+  return (
+    //  <Select
+    //   options={options}
+    //   isLoading={isLoading}
+    //   onInputChange={onSearch}       // user typing triggers Re-fetch
+    //   onChange={(selectedOption: any) => onSelect(selectedOption?.value ?? null)} // return id
+    //   placeholder={placeholder || "Select an option"}
+    //   isClearable
+    // />
+
+
+    <Controller
+  name="manufacturer" // or whatever your field name is
+  control={control}
+  render={({ field: { onChange } }) => (
+    <Select
+      options={options}
+      isLoading={isLoading}
+      onInputChange={onSearch}       // Your original fetch logic
+      onChange={(selectedOption: any) => {
+        const val = selectedOption?.value ?? null;
+        onChange(val);               // Updates React Hook Form
+        onSelect(val);        
+      }}
+      placeholder={placeholder || "Select an option"}
+      isClearable
+    />
+      )}
+    />
+  );
+}

@@ -15,10 +15,10 @@ export function useWholesalers(params: WholesalerSearchQuery) {
   })
 }
 
-export function useWholesaler(id: number) {
+export function useWholesaler(id: string) {
   return useQuery({
     queryKey: ["wholesaler", id],
-    queryFn: async () => {const res = await api.get<WholesalerType[]>(`${inventoryAPI}/wholesalers/${id}/`)
+    queryFn: async () => {const res = await api.get<WholesalerType>(`${inventoryAPI}/wholesalers/${id}/`)
       return res.data
     },
     enabled: !!id,
