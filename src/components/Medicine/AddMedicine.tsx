@@ -71,9 +71,9 @@ const onSubmit = async (data: CreateMedicineType) => {
           control={control}
           options={options ?? []}
           isLoading={isLoading}
-          onSearch={setSearchQuery} // Your existing search logic
+          onSearch={setSearchQuery}
           onSelect={setSelectedId}
-          placeholder="Select a Manufacturer"
+          placeholder="Select a Manufacturer..."
         />
         
         {/* <Dropdown onSearch={setSearchQuery} onSelect={setSelectedId} placeholder="Select a Manufacturer" options={options ?? []} value={selectedOption}/> */}

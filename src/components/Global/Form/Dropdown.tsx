@@ -68,10 +68,10 @@ export default function Dropdown({options, name, control, onSelect,  onSearch,  
     <Select
       options={options}
       isLoading={isLoading}
-      onInputChange={onSearch}       // Your original fetch logic
+      onInputChange={onSearch}   
       onChange={(selectedOption: any) => {
         const val = selectedOption?.value ?? null;
-        onChange(val);               // Updates React Hook Form
+        onChange(val);         
         onSelect(val);        
       }}
       placeholder={placeholder || "Select an option"}
