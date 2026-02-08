@@ -15,7 +15,7 @@ export default function ContactField({ label, name, placeholder, register, error
 
   return (
     <div className="relative pb-2">
-      <label htmlFor={name} className="block text-sm mb-1 font-medium text-gray-700">
+      <label htmlFor={name} className="capitalize block text-sm mb-1 font-medium text-gray-700">
         {label}
       </label>
       <input

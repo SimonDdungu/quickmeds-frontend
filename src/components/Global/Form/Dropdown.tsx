@@ -10,13 +10,14 @@ interface DropdownOption {
 
 interface DropdownList {
   name: string;
+  label: string;
   control: Control<any>;
   options: DropdownOption[];
   //value: DropdownOption | null;
   isLoading?: boolean;
   placeholder?: string;
-  onSearch: (inputValue: string) => void;     // Fires every time the user types in the dropdown
-  onSelect: (id: string | null) => void;   // Fires when the user clicks an option
+  onSearch?: (inputValue: string) => void;     // Fires every time the user types in the dropdown
+  onSelect?: (id: string | null) => void;   // Fires when the user clicks an option
 }
 
 // import {Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxItem, ComboboxList} from "@/components/ui/combobox"
@@ -49,7 +50,7 @@ interface DropdownList {
 //   )
 // }
 
-export default function Dropdown({options, name, control, onSelect,  onSearch,  isLoading = false, placeholder = "Search..."}: DropdownList) {
+export default function Dropdown({options, name, label, control, onSelect,  onSearch,  isLoading = false, placeholder = "Search..."}: DropdownList) {
   return (
     //  <Select
     //   options={options}
@@ -60,24 +61,30 @@ export default function Dropdown({options, name, control, onSelect,  onSearch,  
     //   isClearable
     // />
 
+    <div className="relative pb-2">
 
-    <Controller
-  name="manufacturer" // or whatever your field name is
-  control={control}
-  render={({ field: { onChange } }) => (
-    <Select
-      options={options}
-      isLoading={isLoading}
-      onInputChange={onSearch}   
-      onChange={(selectedOption: any) => {
-        const val = selectedOption?.value ?? null;
-        onChange(val);         
-        onSelect(val);        
-      }}
-      placeholder={placeholder || "Select an option"}
-      isClearable
-    />
-      )}
-    />
+        <label htmlFor={name} className="capitalize block text-sm mb-1 font-medium text-gray-700">
+                {label}
+        </label>   
+         
+        <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange } }) => (
+                <Select
+                  options={options}
+                  isLoading={isLoading}
+                  onInputChange={onSearch}   
+                  onChange={(selectedOption: any) => {
+                    const val = selectedOption?.value ?? null;
+                    onChange(val);       
+                  }}
+                  placeholder={placeholder || "Select an option"}
+                  isClearable
+                />
+          )}
+        />
+
+    </div>
   );
 }

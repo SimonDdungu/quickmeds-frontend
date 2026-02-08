@@ -32,7 +32,7 @@ export function AddMedicineDialog() {
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="!max-w-3xl ">
           <DialogHeader>
             <DialogTitle>Add Medicine</DialogTitle>
           </DialogHeader>

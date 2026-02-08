@@ -10,7 +10,7 @@ interface FormInputProps {
   errors?: FieldErrors
 }
 
-export default function InputField({ label, name, placeholder, register, errors }: FormInputProps) {
+export default function NumberField({ label, name, placeholder, register, errors }: FormInputProps) {
   const error = errors?.[name]
 
   return (
@@ -23,6 +23,9 @@ export default function InputField({ label, name, placeholder, register, errors 
         type="text"
         placeholder={placeholder}
         {...register(name)}
+        onChange={(e) => {
+          e.target.value = e.target.value.replace(/\D/g, "");
+        }}
         className={`w-full border rounded px-3 py-2  focus:border-blue-800 text-sm
             ${error ? "border-red-500" : "border-gray-300"} outline-none`}/>
       {error && <p className="text-red-500 text-sm absolute bottom">{error.message?.toString()}</p>}

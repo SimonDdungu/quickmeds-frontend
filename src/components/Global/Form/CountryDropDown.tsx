@@ -20,7 +20,7 @@ const CountryDropDown = ({ label, name, placeholder, register, errors }: FormInp
     
   return (
      <div className="relative pb-2">
-      <label className="block text-sm mb-1 font-medium text-gray-700">{name}</label>
+      <label className="capitalize block text-sm mb-1 font-medium text-gray-700">{name}</label>
       <select {...register(name)} className={`w-full border rounded px-3 py-2 text-sm focus:border-blue-800 outline-none ${error ? "border-red-500" : "border-gray-300"}`}
         defaultValue="">
             <option value="">Select a country</option>

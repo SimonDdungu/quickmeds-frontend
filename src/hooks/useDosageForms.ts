@@ -9,9 +9,8 @@ export function useDosageForms() {
     queryKey: ["dosage_forms"],
     queryFn: async () => {
       const res = await api.get(`${inventoryAPI}/dosage_form/`)
-      return res.data as { value: string; dosage: string }[]
+      return res.data as { value: string; label: string }[]
     },
     staleTime: 1000 * 60 * 60,
   })
-}
 }

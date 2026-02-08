@@ -9,7 +9,7 @@ export function useStrengthUnits() {
     queryKey: ["strength_unit"],
     queryFn: async () => {
       const res = await api.get(`${inventoryAPI}/strength_unit/`)
-      return res.data as { value: string; strength_unit: string }[]
+      return res.data as { value: string; label: string }[]
     },
     staleTime: 1000 * 60 * 60,
   })
