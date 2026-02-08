@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ContactField, InputField, NumberField, Dropdown } from "../Global/Form"
+import { ContactField, InputField, NumberField, Dropdown, TextField } from "../Global/Form"
 import { useManufacturers } from "@/hooks/inventory/useManufacturers"
 import { CreateMedicineType } from "@/interfaces"
 import LoadingSpinner from "../Global/LoadingSpinner"
@@ -67,7 +67,7 @@ const onSubmit = async (data: CreateMedicineType) => {
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
 
         <div className="flex flex-row gap-x-5">
-          <InputField label="Name" name="name" placeholder="Enter medicine name" register={register} errors={errors} />
+          <InputField label="Name" name="name" placeholder="Enter medicine name" register={register} errors={errors} required={true}/>
           <InputField label="Generic Name" name="generic_name" placeholder="Enter generic name" register={register} errors={errors} />
         <Dropdown
           name="dosage_form"
@@ -79,6 +79,7 @@ const onSubmit = async (data: CreateMedicineType) => {
         </div>
 
         <Dropdown
+          required={true}
           name="manufacturer"
           label="Manufacturer"
           control={control}
@@ -87,6 +88,7 @@ const onSubmit = async (data: CreateMedicineType) => {
           onSearch={setSearchQuery}
           onSelect={setSelectedId}
           placeholder="Select a Manufacturer..."
+          errors={errors}
         />
 
 
@@ -104,7 +106,7 @@ const onSubmit = async (data: CreateMedicineType) => {
 
         
 
-        <InputField label="Description" name="description" placeholder="Enter description" register={register} errors={errors} />
+        <TextField label="Description" name="description" placeholder="Enter description of the medicine..." register={register} errors={errors} />
 
         
         

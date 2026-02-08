@@ -8,15 +8,17 @@ interface FormInputProps {
   placeholder?: string
   register: any
   errors?: FieldErrors
+  required?: boolean
 }
 
-export default function InputField({ label, name, placeholder, register, errors }: FormInputProps) {
+export default function InputField({ label, name, required, placeholder, register, errors }: FormInputProps) {
   const error = errors?.[name]
 
   return (
     <div className="relative pb-2">
-      <label htmlFor={name} className="capitalize block text-sm mb-1 font-medium text-gray-700">
+      <label htmlFor={name} className="capitalize flex text-sm mb-1 font-medium text-gray-700">
         {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
       </label>
       <input
         id={name}

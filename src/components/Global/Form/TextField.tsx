@@ -11,7 +11,7 @@ interface FormInputProps {
   required?: boolean
 }
 
-export default function NumberField({ label, required, name, placeholder, register, errors }: FormInputProps) {
+export default function TextField({ label, required, name, placeholder, register, errors }: FormInputProps) {
   const error = errors?.[name]
 
   return (
@@ -21,16 +21,13 @@ export default function NumberField({ label, required, name, placeholder, regist
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      <input
-        id={name}
-        type="text"
-        placeholder={placeholder}
-        {...register(name, {setValueAs: (input: string) => (input === "" ? undefined : Number(input))}   )}
-        onChange={(e) => {
-          e.target.value = e.target.value.replace(/\D/g, "");
-        }}
-        className={`w-full border rounded px-3 py-2  focus:border-blue-800 text-sm
-            ${error ? "border-red-500" : "border-gray-300"} outline-none`}/>
+      <textarea
+          id={name}
+          placeholder={placeholder}
+          {...register(name)}
+          className={`w-full border rounded px-3 py-2 focus:border-blue-800 text-sm ${error ? "border-red-500" : "border-gray-300"} outline-none resize-none`}
+          rows={4}
+      />
       {error && <p className="text-red-500 text-sm absolute bottom">{error.message?.toString()}</p>}
     </div>
   )

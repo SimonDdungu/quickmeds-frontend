@@ -6,7 +6,7 @@ import { WholesalerType } from '@/interfaces'
 import { Trash } from "lucide-react"
 import { toast } from 'sonner'
 import { useDeleteWholesaler } from '@/hooks/inventory/useWholesalers'
-import AddWholesalers from './AddManufacturers'
+import AddWholesalers from './AddWholesaler'
 import EditWholesalers from './EditManufacturers '
 
 interface EditManufacturesDialogProps {

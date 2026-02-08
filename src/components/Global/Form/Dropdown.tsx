@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Controller, Control } from "react-hook-form";
+import { Controller, Control, FieldErrors } from "react-hook-form";
 import Select from 'react-select';
 
 interface DropdownOption {
@@ -11,11 +11,13 @@ interface DropdownOption {
 interface DropdownList {
   name: string;
   label: string;
+  required?: boolean;
   control: Control<any>;
   options: DropdownOption[];
   //value: DropdownOption | null;
   isLoading?: boolean;
   placeholder?: string;
+  errors?: FieldErrors
   onSearch?: (inputValue: string) => void;     // Fires every time the user types in the dropdown
   onSelect?: (id: string | null) => void;   // Fires when the user clicks an option
 }
@@ -50,7 +52,9 @@ interface DropdownList {
 //   )
 // }
 
-export default function Dropdown({options, name, label, control, onSelect,  onSearch,  isLoading = false, placeholder = "Search..."}: DropdownList) {
+export default function Dropdown({options, required, name, label, control, errors, onSelect,  onSearch,  isLoading = false, placeholder = "Search..."}: DropdownList) {
+  const error = errors?.[name]
+  
   return (
     //  <Select
     //   options={options}
@@ -63,9 +67,10 @@ export default function Dropdown({options, name, label, control, onSelect,  onSe
 
     <div className="relative pb-2">
 
-        <label htmlFor={name} className="capitalize block text-sm mb-1 font-medium text-gray-700">
-                {label}
-        </label>   
+        <label htmlFor={name} className="capitalize flex text-sm mb-1 font-medium text-gray-700">
+          {label}
+          {required && <span className="text-red-500 ml-1">*</span>}
+        </label> 
          
         <Controller
         name={name}
@@ -80,10 +85,16 @@ export default function Dropdown({options, name, label, control, onSelect,  onSe
                     onChange(val);       
                   }}
                   placeholder={placeholder || "Select an option"}
+                  menuPortalTarget={document.body} 
+                  menuPosition="absolute"             
+                  menuPlacement="auto"    
+                  styles={{ menuPortal: (base) => ({...base, zIndex: 9999, pointerEvents: "auto"}) }}
                   isClearable
                 />
           )}
         />
+
+        {error && <p className="text-red-500 text-sm absolute bottom">{error.message?.toString()}</p>}
 
     </div>
   );

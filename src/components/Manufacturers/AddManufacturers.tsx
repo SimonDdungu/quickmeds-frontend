@@ -19,7 +19,7 @@ interface AddManufacturerFormProps {
 
 export default function AddManufacturers({ defaultValues, onCancel, onSave }: AddManufacturerFormProps) {
   const [ErrorMessage, ShowErrorMessage] = useState<boolean>(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<ManufacturerFormData>({
+  const { register, handleSubmit, control, formState: { errors } } = useForm<ManufacturerFormData>({
     defaultValues,
     resolver: zodResolver(manufacturerSchema),
   })
@@ -44,8 +44,8 @@ const onSubmit = async (data: ManufacturersType) => {
       <form onSubmit={handleSubmit(onSubmit)} className="relative overflow-hidden flex flex-col gap-4 w-full max-w-md mx-auto px-4 py-8 bg-white border rounded-lg shadow-sm ">
         {addManufacturer.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
-        <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} />
-        <CountryDropDown label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
+        <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} required={true}/>
+        <CountryDropDown control={control} label="Country" name="country" placeholder="Select a country" errors={errors} />
         <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
         <ContactField label="Contact" name="contact" placeholder="Enter contact number" register={register} errors={errors} />
         <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />

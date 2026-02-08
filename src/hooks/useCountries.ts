@@ -9,7 +9,7 @@ export function useCountries() {
     queryKey: ["countries"],
     queryFn: async () => {
       const res = await api.get(`${inventoryAPI}/countries/`)
-      return res.data as { value: string; country: string }[]
+      return res.data as { value: string; label: string }[]
     },
     staleTime: 1000 * 60 * 60,
   })

@@ -20,7 +20,7 @@ interface AddWholesalerFormProps {
 
 export default function AddWholesalers({ defaultValues, onCancel, onSave }: AddWholesalerFormProps) {
   const [ErrorMessage, ShowErrorMessage] = useState<boolean>(false)
-  const { register, handleSubmit, formState: { errors } } = useForm<WholesalerFormData>({
+  const { register, handleSubmit, control, formState: { errors } } = useForm<WholesalerFormData>({
     defaultValues,
     resolver: zodResolver(wholesalerSchema),
   })
@@ -45,8 +45,8 @@ const onSubmit = async (data: WholesalerType) => {
       <form onSubmit={handleSubmit(onSubmit)} className="relative overflow-hidden flex flex-col gap-4 w-full max-w-md mx-auto px-4 py-8 bg-white border rounded-lg shadow-sm ">
         {addWholesaler.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
-        <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} />
-        <CountryDropDown label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
+        <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} required={true} />
+        <CountryDropDown required={true} control={control} label="Country" name="country" placeholder="Select a country" errors={errors} />
         <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
         <ContactField label="Contact" name="contact" placeholder="Enter contact number" register={register} errors={errors} />
         <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />
