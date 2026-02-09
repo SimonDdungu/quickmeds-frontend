@@ -25,8 +25,10 @@ export default function MedicineTable() {
   const [pagination, setPagination] = useState<PaginationState>({pageIndex: 0, pageSize: 10})
 
   const { data, isLoading, isError } = useMedicines({page: pagination.pageIndex + 1, ...searchQuery})
-  const medicine: MedicineType[] = data?.results ?? ManufacturesDummydata
+  const medicine: MedicineType[] = data?.results ?? []
   const totalItems = data?.count ?? 0
+
+  console.log("MEDICINE DATA: ", medicine)
 
   const clearSearchQueries = () => {
     setName(undefined)

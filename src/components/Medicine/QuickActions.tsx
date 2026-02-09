@@ -18,7 +18,7 @@ interface EditMedicineDialogProps {
 interface DeleteMedicineDialogProps {
   open: boolean
   setOpen: (open: boolean) => void
-  medicine: MedicineType | null
+  medicine: CreateMedicineType | null
 }
 
 export function AddMedicineDialog() {
@@ -48,12 +48,12 @@ export function AddMedicineDialog() {
 }
 
 
-export function EditWholesalersDialog({ open, setOpen, medicine }: EditMedicineDialogProps) {
+export function EditMedicineDialog({ open, setOpen, medicine }: EditMedicineDialogProps) {
 
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-lg">
+        <DialogContent className="!max-w-3xl ">
           <DialogHeader>
             <DialogTitle>Edit Medicine</DialogTitle>
           </DialogHeader>
@@ -70,7 +70,7 @@ export function EditWholesalersDialog({ open, setOpen, medicine }: EditMedicineD
   )
 }
 
-export function DeleteWholesalerDialog({ open, setOpen, medicine }: DeleteMedicineDialogProps) {
+export function DeleteMedicineDialog({ open, setOpen, medicine }: DeleteMedicineDialogProps) {
 
   const deleteMedicine = useDeleteMedicine()
 

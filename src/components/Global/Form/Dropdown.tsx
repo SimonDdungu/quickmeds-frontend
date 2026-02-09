@@ -9,6 +9,7 @@ interface DropdownOption {
 }
 
 interface DropdownList {
+  defaultValue?: DropdownOption | null
   name: string;
   label: string;
   required?: boolean;
@@ -52,19 +53,10 @@ interface DropdownList {
 //   )
 // }
 
-export default function Dropdown({options, required, name, label, control, errors, onSelect,  onSearch,  isLoading = false, placeholder = "Search..."}: DropdownList) {
+export default function Dropdown({options, required, name, label, control, errors, onSelect, defaultValue, onSearch,  isLoading = false, placeholder = "Search..."}: DropdownList) {
   const error = errors?.[name]
   
   return (
-    //  <Select
-    //   options={options}
-    //   isLoading={isLoading}
-    //   onInputChange={onSearch}       // user typing triggers Re-fetch
-    //   onChange={(selectedOption: any) => onSelect(selectedOption?.value ?? null)} // return id
-    //   placeholder={placeholder || "Select an option"}
-    //   isClearable
-    // />
-
     <div className="relative pb-2">
 
         <label htmlFor={name} className="capitalize flex text-sm mb-1 font-medium text-gray-700">
@@ -90,6 +82,7 @@ export default function Dropdown({options, required, name, label, control, error
                   menuPlacement="auto"    
                   styles={{ menuPortal: (base) => ({...base, zIndex: 9999, pointerEvents: "auto"}) }}
                   isClearable
+                  defaultValue={defaultValue}
                 />
           )}
         />

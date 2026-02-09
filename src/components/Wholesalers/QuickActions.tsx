@@ -7,7 +7,7 @@ import { Trash } from "lucide-react"
 import { toast } from 'sonner'
 import { useDeleteWholesaler } from '@/hooks/inventory/useWholesalers'
 import AddWholesalers from './AddWholesaler'
-import EditWholesalers from './EditManufacturers '
+import EditWholesalers from './EditWholesaler '
 
 interface EditManufacturesDialogProps {
   open: boolean

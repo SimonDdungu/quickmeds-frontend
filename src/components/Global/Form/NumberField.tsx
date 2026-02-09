@@ -25,7 +25,7 @@ export default function NumberField({ label, required, name, placeholder, regist
         id={name}
         type="text"
         placeholder={placeholder}
-        {...register(name, {setValueAs: (input: string) => (input === "" ? undefined : Number(input))}   )}
+        {...register(name, {setValueAs: (input: string | null) => (input === "" || input === null ? undefined : Number(input))}   )}
         onChange={(e) => {
           e.target.value = e.target.value.replace(/\D/g, "");
         }}

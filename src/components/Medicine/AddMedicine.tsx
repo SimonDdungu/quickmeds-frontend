@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ContactField, InputField, NumberField, Dropdown, TextField } from "../Global/Form"
+import { InputField, NumberField, Dropdown, TextField } from "../Global/Form"
 import { useManufacturers } from "@/hooks/inventory/useManufacturers"
 import { CreateMedicineType } from "@/interfaces"
 import LoadingSpinner from "../Global/LoadingSpinner"
@@ -42,15 +42,12 @@ export default function AddMedicine({ defaultValues, onCancel, onSave }: AddMedi
     value: m.id,
   }));
 
-  const handleInputChange = (inputValue: string) => {
-    setSearchQuery(inputValue); // update the search query
-  };
 
 const onSubmit = async (data: CreateMedicineType) => {
-  console.log("DATA: ", data)
+  console.log("creating data: ", data)
     addMedicine.mutate(data, {
         onSuccess: () => {
-          toast("Medicine added successfully")
+          toast.success("Medicine added successfully")
            onSave()
           },
         onError: (error) => {
@@ -86,7 +83,6 @@ const onSubmit = async (data: CreateMedicineType) => {
           options={options ?? []}
           isLoading={isLoading}
           onSearch={setSearchQuery}
-          onSelect={setSelectedId}
           placeholder="Select a Manufacturer..."
           errors={errors}
         />

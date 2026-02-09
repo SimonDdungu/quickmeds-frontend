@@ -80,12 +80,13 @@ export type CreateMedicineType = {
   id?: string
   name: string
   generic_name?: string
-  dosage_form?: string
+  dosage_form?: string | null
   strength?: number
-  strength_unit?: string
+  strength_unit?: string | null
   description?: string
   manufacturer: string
-  image?: File
+  manufacturer_detail?: ManufacturersType
+  image?: File | null
 }
 
 export type MedicineSearchQuery = {

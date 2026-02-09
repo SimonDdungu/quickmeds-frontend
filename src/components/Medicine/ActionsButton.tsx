@@ -4,18 +4,18 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { ManufacturersType, WholesalerType } from "@/interfaces"
+import { CreateMedicineType } from "@/interfaces"
 import { useState } from "react"
-import { DeleteWholesalerDialog, EditWholesalersDialog } from "./QuickActions"
+import { DeleteMedicineDialog, EditMedicineDialog } from "./QuickActions"
 
 interface ActionMenuProps {
-  rowData: ManufacturersType
+  rowData: CreateMedicineType
 }
 
 export const ActionsButton = ({ rowData }: ActionMenuProps) => {
     const [editOpen, setEditOpen] = useState(false)
     const [deleteOpen, setDeleteOpen] = useState(false)
-    const [selectedWholesaler, setSelectedWholesaler] = useState<WholesalerType | null>(null)
+    const [selectedMedicine, setSelectedMedicine] = useState<CreateMedicineType | null>(null)
 return (
     <div>
         <Popover>
@@ -31,20 +31,20 @@ return (
                 className="w-32 p-2 flex flex-col gap-1">
                 <button
                 className="text-sm text-blue-600 hover:bg-blue-50 rounded px-2 py-1 text-left cursor-pointer"
-                onClick={() => {setEditOpen(true); setSelectedWholesaler(rowData);} }>
+                onClick={() => {setEditOpen(true); setSelectedMedicine(rowData);} }>
                     Edit
                 </button>
 
                 <button
                 className="text-sm text-red-600 hover:bg-red-50 rounded px-2 py-1 text-left cursor-pointer"
-                onClick={() => {setDeleteOpen(true); setSelectedWholesaler(rowData);}}>
+                onClick={() => {setDeleteOpen(true); setSelectedMedicine(rowData);}}>
                     Delete
                 </button>
             </PopoverContent>
         </Popover>
 
-         <EditWholesalersDialog open={editOpen} setOpen={setEditOpen}  wholesaler={selectedWholesaler}/>
-         <DeleteWholesalerDialog open={deleteOpen} setOpen={setDeleteOpen}  wholesaler={selectedWholesaler}/>
+         <EditMedicineDialog open={editOpen} setOpen={setEditOpen}  medicine={selectedMedicine}/>
+         <DeleteMedicineDialog open={deleteOpen} setOpen={setDeleteOpen}  medicine={selectedMedicine}/>
     </div>
     )
 }
