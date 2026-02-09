@@ -72,7 +72,7 @@ const onSubmit = async (data: CreateMedicineType) => {
             isLoading={dosage_loading}
             options={dosage_forms ?? []}
             placeholder="Select dosage Form..."
-            defaultValue={defaultValues?.dosage_form ? {label: defaultValues?.dosage_form, value: defaultValues?.dosage_form} : null}
+            defaultValue={defaultValues?.dosage_form ? dosage_forms?.find(option => option.value === defaultValues.dosage_form) : null}
           />
         </div>
 
@@ -101,7 +101,7 @@ const onSubmit = async (data: CreateMedicineType) => {
             options={strength_unit ?? []}
             isLoading={strength_unit_loading}
             placeholder="Select strength unit..."
-            defaultValue={defaultValues?.strength_unit ? {label: defaultValues?.strength_unit, value: defaultValues?.strength_unit} : null}
+            defaultValue={defaultValues?.strength_unit ? strength_unit?.find(option => option.value === defaultValues.strength_unit) : null}
           />
         </div>
 
