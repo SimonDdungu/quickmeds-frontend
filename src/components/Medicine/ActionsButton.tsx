@@ -4,12 +4,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { CreateMedicineType } from "@/interfaces"
+import { CreateMedicineType, MedicineType } from "@/interfaces"
 import { useState } from "react"
 import { DeleteMedicineDialog, EditMedicineDialog } from "./QuickActions"
 
 interface ActionMenuProps {
-  rowData: CreateMedicineType
+  rowData: any
 }
 
 export const ActionsButton = ({ rowData }: ActionMenuProps) => {

@@ -45,7 +45,7 @@ const onSubmit = async (data: ManufacturersType) => {
         {addManufacturer.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
         <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} required={true}/>
-        <CountryDropDown control={control} label="Country" name="country" placeholder="Select a country" errors={errors} />
+        <CountryDropDown register={register} control={control} label="Country" name="country" placeholder="Select a country" errors={errors} />
         <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
         <ContactField label="Contact" name="contact" placeholder="Enter contact number" register={register} errors={errors} />
         <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />

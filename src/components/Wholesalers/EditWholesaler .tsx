@@ -2,11 +2,9 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { manufacturerSchema, ManufacturerFormData } from "../../schema/manufacturerSchema"
 import { ContactField, InputField } from "../Global/Form"
 import { useState } from "react"
-import { useUpdateManufacturer } from "@/hooks/inventory/useManufacturers"
-import { ManufacturersType, WholesalerType } from "@/interfaces"
+import { WholesalerType } from "@/interfaces"
 import { toast } from "sonner"
 import LoadingSpinner from "../Global/LoadingSpinner"
 import CountryDropDown from "../Global/Form/CountryDropDown"
@@ -21,7 +19,7 @@ interface EditWholesalerFormProps {
 
 export default function EditWholesalers({ defaultValues, onCancel, onSave }: EditWholesalerFormProps) {
   const [ErrorMessage, ShowErrorMessage] = useState<boolean>(false)
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<WholesalerFormData>({
+  const { register, control, handleSubmit, formState: { errors } } = useForm<WholesalerFormData>({
     defaultValues,
     resolver: zodResolver(wholesalerSchema),
   })
@@ -49,7 +47,7 @@ const onSubmit = async (data: WholesalerType) => {
         {editWholesaler.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
         <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} />
-        <CountryDropDown label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
+        <CountryDropDown control={control} label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
         <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
         <ContactField label="Contact" name="contact" placeholder="Enter contact number" register={register} errors={errors} />
         <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />

@@ -85,7 +85,7 @@ export type CreateMedicineType = {
   strength?: number
   strength_unit?: string | null
   description?: string
-  manufacturer: string
+  manufacturer?: string
   manufacturer_detail?: ManufacturersType
   image?: File | string | null
 }

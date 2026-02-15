@@ -3,8 +3,7 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { ContactField, InputField } from "../Global/Form"
-import { useAddManufacturer } from "@/hooks/inventory/useManufacturers"
-import { ManufacturersType, WholesalerType } from "@/interfaces"
+import { WholesalerType } from "@/interfaces"
 import CountryDropDown from "../Global/Form/CountryDropDown"
 import LoadingSpinner from "../Global/LoadingSpinner"
 import { useState } from "react"
@@ -46,7 +45,7 @@ const onSubmit = async (data: WholesalerType) => {
         {addWholesaler.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
         <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} required={true} />
-        <CountryDropDown required={true} control={control} label="Country" name="country" placeholder="Select a country" errors={errors} />
+        <CountryDropDown register={register} required={true} control={control} label="Country" name="country" placeholder="Select a country" errors={errors} />
         <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
         <ContactField label="Contact" name="contact" placeholder="Enter contact number" register={register} errors={errors} />
         <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />

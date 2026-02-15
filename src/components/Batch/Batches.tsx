@@ -1,32 +1,18 @@
 'use client'
 
-import { PaginationState} from '@tanstack/react-table'
-import {columns} from './Columns'
-import { BatchSearchQuery, BatchType, MedicineType, WholesalerType } from '@/interfaces'
-import { useEffect, useState } from 'react'
+import { BatchSearchQuery, BatchType } from '@/interfaces'
+import { useState } from 'react'
 import { AddBatchDialog, DeleteBatchDialog, EditBatchDialog } from './QuickActions'
 import TextSearchFields, { DateSearchFields, NumberSearchFields } from './SearchFields'
 import { Search, XCircle } from 'lucide-react'
 
-import Datatable from '../Global/Datatable'
 import { useBatches } from '@/hooks/inventory/useBatch'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 import { Pagination } from '../Global'
 
 interface BatchCardProps {
-  // id: string
   batch: Partial<BatchType>
-  // batch_number: string
-  // medicine_details: Partial<MedicineType>
-  // wholesaler_details: Partial<WholesalerType>
-  // purchase_price: number
-  // selling_price: number
-  // expiry_date: string
-  // quantity_remaining?: number
-  // quantity_received: number
 }
-
-// id, batch_number, selling_price, medicine_details, wholesaler_details, purchase_price, expiry_date, quantity_received, quantity_remaining
 
 export const BatchCards = ({batch, }: BatchCardProps) => {
   const [editOpen, setEditOpen] = useState<boolean>(false)
@@ -78,8 +64,7 @@ export default function Batches() {
   const [page, setPage] = useState<number>(1)
   const [batch_number, setBatchNumber] = useState<string | undefined>(undefined)
   const [search, setSearch] = useState<string | undefined>(undefined)
-  // const [medicine, setMedicine] = useState<string | undefined>(undefined)
-  // const [medicine_generic, setMedicineGeneric] = useState<string | undefined>(undefined)
+
   const [wholesaler, setWholesaler] = useState<string | undefined>(undefined)
   const [selling_price_per_unit, setSelling_price_per_unit] = useState<number | undefined>(undefined)
   const [selling_price_minimum, setSelling_price_minimum] = useState<number | undefined>(undefined)
@@ -109,11 +94,7 @@ export default function Batches() {
     expiry_date_to: undefined
   });
 
-  // useEffect(() => {
-  //   setMedicineGeneric(medicine);
-  // }, [medicine]);
-
-  const { data, isLoading, isError } = useBatches({page: page, ...searchQuery})
+  const { data } = useBatches({page: page, ...searchQuery})
 
   const batches: BatchType[] = data?.results ?? []
 
@@ -123,8 +104,7 @@ export default function Batches() {
     setBatchNumber(undefined)
     setWholesaler(undefined)
     setSearch(undefined)
-    // setMedicine(undefined)
-    // setMedicineGeneric(undefined)
+
     setSelling_price_per_unit(undefined)
     setSelling_price_minimum(undefined)
     setSelling_price_maximum(undefined)
@@ -209,23 +189,13 @@ export default function Batches() {
               {batches.map((batch) => (
                 <BatchCards 
                   key={batch.id} 
-                  // id={batch.id ?? ""} 
-                  // batch_number={batch.batch_number}
-                  // medicine_details={batch.medicine_details ?? {}} 
-                  // wholesaler_details={batch.wholesaler_details ?? {}}
-                  // purchase_price={batch.purchase_price} 
-                  // selling_price={batch.selling_price_per_unit}
-                  // expiry_date={batch.expiry_date}
-                  // quantity_received={batch.quantity_received}
-                  // quantity_remaining={batch.quantity_remaining}
                   batch={batch}
                 />
               ))}
             </div>
 
             <Pagination totalCount={data?.count ?? 0} pageSize={10} page={page} onPageChange={setPage}/>
-            
-          {/* <Datatable data={data} columns={columns} isLoading={isLoading} pagination={pagination} setPagination={setPagination} totalItems={totalItems}/> */}
+          
 
     </div>
   )
