@@ -2,42 +2,44 @@
 import React from 'react'
 import { useState } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog"
-import { CreateMedicineType, MedicineType } from '@/interfaces'
+import { BatchType, CreateMedicineType, MedicineType } from '@/interfaces'
 import { Trash } from "lucide-react"
 import { toast } from 'sonner'
-import AddMedicine from './AddMedicine'
+import AddBatch from './AddBatch'
 import { useDeleteMedicine } from '@/hooks/inventory/useMedicine'
-import EditMedicine from './EditMedicine '
+import EditMedicine from './EditBatch'
+import { useDeleteBatch } from '@/hooks/inventory/useBatch'
+import EditBatch from './EditBatch'
 
-interface EditMedicineDialogProps {
+interface EditBatchDialogProps {
   open: boolean
   setOpen: (open: boolean) => void
-  medicine: CreateMedicineType | null
+  batch: Partial<BatchType>
 }
 
-interface DeleteMedicineDialogProps {
+interface DeleteBatchDialogProps {
   open: boolean
   setOpen: (open: boolean) => void
-  medicine: CreateMedicineType | null
+  batch: Partial<BatchType>
 }
 
-export function AddMedicineDialog() {
+export function AddBatchDialog() {
   const [open, setOpen] = useState(false)
 
   return (
     <div className='ml-auto'>
       <button className='cursor-pointer block w-max  px-5 py-2 rounded-lg text-white bg-blue-800 text-sm hover:bg-blue-900 transition-colors'
         onClick={() => setOpen(true)}>
-        Add Medicine
+        Add Batch
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="!max-w-6xl ">
+        <DialogContent className="!max-w-4xl ">
           <DialogHeader>
-            <DialogTitle>Add Medicine</DialogTitle>
+            <DialogTitle>Add Batch</DialogTitle>
           </DialogHeader>
 
-          <AddMedicine
+          <AddBatch
             onCancel={() => setOpen(false)}
             onSave={() => setOpen(false)}
           />
@@ -48,18 +50,18 @@ export function AddMedicineDialog() {
 }
 
 
-export function EditMedicineDialog({ open, setOpen, medicine }: EditMedicineDialogProps) {
+export function EditBatchDialog({ open, setOpen, batch }: EditBatchDialogProps) {
 
   return (
     <div>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-6xl ">
           <DialogHeader>
-            <DialogTitle>Edit Medicine</DialogTitle>
+            <DialogTitle>Edit Batch</DialogTitle>
           </DialogHeader>
 
-          <EditMedicine
-            defaultValues={medicine ?? undefined}
+          <EditBatch
+            defaultValues={batch ?? undefined}
             onCancel={() => setOpen(false)}
             onSave={() => setOpen(false)}
           />
@@ -70,20 +72,20 @@ export function EditMedicineDialog({ open, setOpen, medicine }: EditMedicineDial
   )
 }
 
-export function DeleteMedicineDialog({ open, setOpen, medicine }: DeleteMedicineDialogProps) {
+export function DeleteBatchDialog({ open, setOpen, batch }: DeleteBatchDialogProps) {
 
-  const deleteMedicine = useDeleteMedicine()
+  const deleteBatch = useDeleteBatch()
 
   const handleDelete = () => {
-    if (!medicine?.id) return
+    if (!batch?.id) return
 
-     deleteMedicine.mutate(medicine.id, {
+     deleteBatch.mutate(batch.id, {
         onSuccess: () => {
-          toast.success("Medicine deleted successfully")
+          toast.success("Batch deleted successfully")
            setOpen(false)
           },
         onError: (error) => {
-          toast.error("Medicine was not deleted!")
+          toast.error("Batch was not deleted!")
         }
   })
 }
@@ -93,13 +95,13 @@ export function DeleteMedicineDialog({ open, setOpen, medicine }: DeleteMedicine
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Delete Medicine</DialogTitle>
+            <DialogTitle>Delete Batch</DialogTitle>
           </DialogHeader>
 
           <div>
             <div className='flex gap-x-4 items-center mb-10'>
               <Trash size={26} className='text-red-500'/>
-              <p>Are you sure you want to delete this medicine?</p>
+              <p>Are you sure you want to delete this batch?</p>
             </div>
               <div className="flex justify-end gap-2 mt-4">
               <button type="button" onClick={() => setOpen(false)} className="px-5 py-1 cursor-pointer rounded-lg border bg-gray-100 hover:bg-gray-200 text-sm transition-colors">

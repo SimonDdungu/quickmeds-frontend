@@ -19,7 +19,7 @@ interface EditManufacturerFormProps {
 
 export default function EditManufacturers({ defaultValues, onCancel, onSave }: EditManufacturerFormProps) {
   const [ErrorMessage, ShowErrorMessage] = useState<boolean>(false)
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ManufacturerFormData>({
+  const { register, handleSubmit, control, formState: { errors, isSubmitting } } = useForm<ManufacturerFormData>({
     defaultValues,
     resolver: zodResolver(manufacturerSchema),
   })
@@ -47,7 +47,7 @@ const onSubmit = async (data: ManufacturersType) => {
         {editManufacturer.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
         <InputField label="Name" name="name" placeholder="Enter manufacturer name" register={register} errors={errors} />
-        <CountryDropDown label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
+        <CountryDropDown control={control} label="Country" name="country" placeholder="Enter country" register={register} errors={errors} />
         <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
         <ContactField label="Contact" name="contact" placeholder="Enter contact number" register={register} errors={errors} />
         <InputField label="Address" name="address" placeholder="Enter address" register={register} errors={errors} />

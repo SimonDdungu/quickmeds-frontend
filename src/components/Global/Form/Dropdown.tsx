@@ -57,7 +57,7 @@ export default function Dropdown({options, required, name, label, control, error
   const error = errors?.[name]
   
   return (
-    <div className="relative pb-2">
+    <div className="relative pb-2 min-w-50">
 
         <label htmlFor={name} className="capitalize flex text-sm mb-1 font-medium text-gray-700">
           {label}
@@ -80,7 +80,7 @@ export default function Dropdown({options, required, name, label, control, error
                   menuPortalTarget={document.body} 
                   menuPosition="absolute"             
                   menuPlacement="auto"    
-                  styles={{ menuPortal: (base) => ({...base, zIndex: 9999, pointerEvents: "auto"}) }}
+                  styles={{ menuPortal: (base) => ({...base, zIndex: 999, pointerEvents: "auto"}), menu: base => ({ ...base, maxHeight: '300px', overflowY: 'auto' })}}
                   isClearable
                   defaultValue={defaultValue}
                 />

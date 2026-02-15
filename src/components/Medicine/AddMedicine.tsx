@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { InputField, NumberField, Dropdown, TextField } from "../Global/Form"
+import { InputField, NumberField, Dropdown, TextField, ImageField, ReactNumberField } from "../Global/Form"
 import { useManufacturers } from "@/hooks/inventory/useManufacturers"
 import { CreateMedicineType } from "@/interfaces"
 import LoadingSpinner from "../Global/LoadingSpinner"
@@ -24,8 +24,8 @@ export default function AddMedicine({ defaultValues, onCancel, onSave }: AddMedi
   //const [name, setName] = useState<string | null>("")
   const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined)
   const [ErrorMessage, ShowErrorMessage] = useState<boolean>(false)
-  const [selectedOption, setSelectedOption] = useState<{ label: string; value: string } | null>(null);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [image, setImage] = useState<File>();
+  
   const { register, handleSubmit, control, formState: { errors } } = useForm<MedicineFormData>({
     defaultValues,
     resolver: zodResolver(medicineSchema),
@@ -44,8 +44,21 @@ export default function AddMedicine({ defaultValues, onCancel, onSave }: AddMedi
 
 
 const onSubmit = async (data: CreateMedicineType) => {
-  console.log("creating data: ", data)
-    addMedicine.mutate(data, {
+  const formData = new FormData()
+  
+  Object.entries(data).forEach(([key, value]) => {
+    if (value !== undefined && value !== null) {
+      formData.append(key, value as any);
+    }
+  });
+
+  if(image){
+    formData.append("image", image)
+  }
+
+  console.log("creating data: ", formData)
+
+    addMedicine.mutate(formData, {
         onSuccess: () => {
           toast.success("Medicine added successfully")
            onSave()
@@ -63,49 +76,62 @@ const onSubmit = async (data: CreateMedicineType) => {
         {addMedicine.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
 
-        <div className="flex flex-row gap-x-5">
-          <InputField label="Name" name="name" placeholder="Enter medicine name" register={register} errors={errors} required={true}/>
-          <InputField label="Generic Name" name="generic_name" placeholder="Enter generic name" register={register} errors={errors} />
-        <Dropdown
-          name="dosage_form"
-          label="Dosage Form"
-          control={control}
-          options={dosage_forms ?? []}
-          placeholder="Select dosage Form..."
-        />
+       
+        <div className="flex justify-start items-center">
+
+        <div className="border-r pr-4 gap-y-4 flex flex-col">
+          
+            <div className="flex flex-row gap-x-5">
+              <InputField label="Name" name="name" placeholder="Enter medicine name" register={register} errors={errors} required={true}/>
+              <InputField label="Generic Name" name="generic_name" placeholder="Enter generic name" register={register} errors={errors} />
+            <Dropdown
+              name="dosage_form"
+              label="Dosage Form"
+              control={control}
+              isLoading={dosage_loading}
+              options={dosage_forms ?? []}
+              placeholder="Select dosage Form..."
+              errors={errors}
+            />
+            </div>
+
+            <Dropdown
+              required={true}
+              name="manufacturer"
+              label="Manufacturer"
+              control={control}
+              options={options ?? []}
+              isLoading={isLoading}
+              onSearch={setSearchQuery}
+              placeholder="Select a Manufacturer..."
+              errors={errors}
+            />
+
+
+            <div className="flex flex-row gap-x-5">
+              <ReactNumberField control={control} label="Strength" name="strength" placeholder="Enter strength" register={register} errors={errors}/>
+              <Dropdown
+                name="strength_unit"
+                label="Strength Unit"
+                control={control}
+                options={strength_unit ?? []}
+                isLoading={strength_unit_loading}
+                placeholder="Select strength unit..."
+              />
+            </div>
+
+            
+
+            <TextField label="Description" name="description" placeholder="Enter description of the medicine..." register={register} errors={errors} />
+
+            </div>
+        
+
+            <div className="mx-auto">
+                 <ImageField value={image} onChange={setImage}/>
+            </div>
+
         </div>
-
-        <Dropdown
-          required={true}
-          name="manufacturer"
-          label="Manufacturer"
-          control={control}
-          options={options ?? []}
-          isLoading={isLoading}
-          onSearch={setSearchQuery}
-          placeholder="Select a Manufacturer..."
-          errors={errors}
-        />
-
-
-        <div className="flex flex-row gap-x-5">
-          <NumberField label="Strength" name="strength" placeholder="Enter strength" register={register} errors={errors} />
-          <Dropdown
-            name="strength_unit"
-            label="Strength Unit"
-            control={control}
-            options={strength_unit ?? []}
-            isLoading={strength_unit_loading}
-            placeholder="Select strength unit..."
-          />
-        </div>
-
-        
-
-        <TextField label="Description" name="description" placeholder="Enter description of the medicine..." register={register} errors={errors} />
-
-        
-        
         
         {/* <Dropdown onSearch={setSearchQuery} onSelect={setSelectedId} placeholder="Select a Manufacturer" options={options ?? []} value={selectedOption}/> */}
 

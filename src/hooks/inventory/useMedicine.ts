@@ -30,7 +30,7 @@ export function useAddMedicine() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: CreateMedicineType) => {
+    mutationFn: async (data: any) => {
       const res = await api.post<MedicineType>(`${inventoryAPI}/medicine/`, data)
       return res.data
     },
@@ -44,7 +44,7 @@ export function useUpdateMedicine() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: CreateMedicineType) => {const res = await api.put<MedicineType>(`${inventoryAPI}/medicine/${data.id}/`, data)
+    mutationFn: async ({id, data}: {id: string | undefined, data: any}) => {const res = await api.put<MedicineType>(`${inventoryAPI}/medicine/${id}/`, data)
       return res.data
     },
     onSuccess: (data) => {

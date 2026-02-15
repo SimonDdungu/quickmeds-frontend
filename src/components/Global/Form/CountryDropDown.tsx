@@ -13,6 +13,7 @@ interface DropdownList {
   label: string;
   required?: boolean;
   control: Control<any>;
+  register: any;
   // options: DropdownOption[];
   //value: DropdownOption | null;
   isLoading?: boolean;
@@ -35,9 +36,9 @@ interface FormInputProps {
 
 //{ label, required, name, placeholder, register, errors }: FormInputProps
 
-const CountryDropDown = ({required, name, label, control, errors, onSelect,  onSearch, placeholder = "Search..."}: DropdownList) => {
+const CountryDropDown = ({required, name, label, control, errors, register, onSelect,  onSearch, placeholder = "Search..."}: DropdownList) => {
 
-    const { data: countries, isLoading } = useCountries()
+    const { data: countries = [], isLoading } = useCountries()
     const error = errors?.[name]
     
   return (

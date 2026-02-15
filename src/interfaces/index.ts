@@ -55,6 +55,7 @@ export type WholesalerType = {
 }
 
 export type WholesalerSearchQuery = {
+  id?: string
   page?: number
   name?: string
   country?: string
@@ -86,10 +87,11 @@ export type CreateMedicineType = {
   description?: string
   manufacturer: string
   manufacturer_detail?: ManufacturersType
-  image?: File | null
+  image?: File | string | null
 }
 
 export type MedicineSearchQuery = {
+  id?: string
   page?: number
   name?: string
   generic_name?: string
@@ -99,4 +101,46 @@ export type MedicineSearchQuery = {
   strength_max?: number
   strength_unit?: string
   manufacturer?: string
+  search?: string
+}
+
+
+export type BatchType = {
+  id?: string
+  batch_number: string
+  medicine?: string
+  medicine_details?: Partial<MedicineType>
+  wholesaler?: string
+  wholesaler_details?: Partial<WholesalerType>
+  selling_price_per_unit: number
+  purchase_price: number
+  quantity_received: number
+  quantity_remaining?: number
+  expiry_date: string
+  created_at?: string
+  updated_at?: string
+}
+
+export type BatchSearchQuery = {
+  page?: number
+  search?: string
+  batch_number?: string
+  medicine?: string
+  medicine_generic?: string
+  wholesaler?: string
+  selling_price_per_unit?: number
+  selling_price_minimum?: number
+  selling_price_maximum ?: number
+  purchase_price?: number
+  purchase_price_minimum?: number
+  purchase_price_maximum?: number
+  quantity_received?: number
+  quantity_received_min?: number
+  quantity_received_max?: number
+  quantity_remaining?: number
+  quantity_remaining_min?: number
+  quantity_remaining_max?: number
+  expiry_date?: string
+  expiry_date_from?: string
+  expiry_date_to?: string
 }
