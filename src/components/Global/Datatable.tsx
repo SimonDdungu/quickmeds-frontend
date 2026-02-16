@@ -53,7 +53,7 @@ const Datatable = <T,>({data, columns, isLoading, pagination, setPagination,tota
                     </TableCell>
                   </TableRow>
                 </TableBody>
-              ): (
+              ): table.getRowModel().rows.length > 0 ? (
                 <TableBody>
                   {table.getRowModel().rows.map(row => (
                     <TableRow key={row.id} className="hover:bg-blue-100">
@@ -65,8 +65,14 @@ const Datatable = <T,>({data, columns, isLoading, pagination, setPagination,tota
                     </TableRow>
                   ))}
                 </TableBody>
-
-                )}
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={table.getAllColumns().length} className="text-center p-4 text-gray-500">
+                    Backend is not yet deployed!
+                  </TableCell>
+                </TableRow>
+              )
+              }
             </Table>
 
         </div>

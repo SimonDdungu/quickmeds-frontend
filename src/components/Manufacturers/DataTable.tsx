@@ -25,8 +25,8 @@ export default function ManufacturerTable() {
   const [pagination, setPagination] = useState<PaginationState>({pageIndex: 0, pageSize: 10})
 
   const { data, isLoading, isError } = useManufacturers({page: pagination.pageIndex + 1, ...searchQuery})
-  const manufacturers: ManufacturersType[] = data?.results ?? ManufacturesDummydata
-  const totalItems = data?.count ?? ManufacturesDummydata.length
+  const manufacturers: ManufacturersType[] = data?.results ?? []
+  const totalItems = data?.count ?? 0
 
   const clearSearchQueries = () => {
     setName(undefined)

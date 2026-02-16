@@ -21,7 +21,7 @@ export default function WholesalerTable() {
   const [pagination, setPagination] = useState<PaginationState>({pageIndex: 0, pageSize: 10})
 
   const { data, isLoading, isError } = useWholesalers({page: pagination.pageIndex + 1, ...searchQuery})
-  const wholesalers: WholesalerType[] = data?.results ?? ManufacturesDummydata
+  const wholesalers: WholesalerType[] = data?.results ?? []
   const totalItems = data?.count ?? 0
 
   const clearSearchQueries = () => {

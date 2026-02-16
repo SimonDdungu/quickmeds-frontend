@@ -9,6 +9,7 @@ import { Search, XCircle } from 'lucide-react'
 import { useBatches } from '@/hooks/inventory/useBatch'
 import Image from 'next/image'
 import { Pagination } from '../Global'
+import LoadingSpinner from '../Global/LoadingSpinner'
 
 interface BatchCardProps {
   batch: Partial<BatchType>
@@ -94,7 +95,7 @@ export default function Batches() {
     expiry_date_to: undefined
   });
 
-  const { data } = useBatches({page: page, ...searchQuery})
+  const { data, isLoading } = useBatches({page: page, ...searchQuery})
 
   const batches: BatchType[] = data?.results ?? []
 
@@ -185,13 +186,12 @@ export default function Batches() {
             </div>
 
             
-            <div className='flex flex-row flex-wrap gap-x-4 gap-y-6 justify-center items-center'>
-              {batches.map((batch) => (
-                <BatchCards 
-                  key={batch.id} 
-                  batch={batch}
-                />
-              ))}
+           <div className="flex flex-row flex-wrap gap-x-4 gap-y-6 justify-center items-center relative">
+              {isLoading ? (<LoadingSpinner />) : batches.length > 0 ? (
+                    batches.map((batch) => (
+                      <BatchCards key={batch.id} batch={batch} />
+                    ))
+                  ) : (<p className="text-center text-gray-500">Backend is not yet deployed!</p>)}
             </div>
 
             <Pagination totalCount={data?.count ?? 0} pageSize={10} page={page} onPageChange={setPage}/>
