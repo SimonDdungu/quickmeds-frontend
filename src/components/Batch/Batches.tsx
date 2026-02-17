@@ -2,7 +2,7 @@
 
 import { BatchSearchQuery, BatchType } from '@/interfaces'
 import { useState } from 'react'
-import { AddBatchDialog, DeleteBatchDialog, EditBatchDialog } from './QuickActions'
+import { AddBatchDialog, DeleteBatchDialog, EditBatchDialog, ViewBatchDialog } from './QuickActions'
 import TextSearchFields, { DateSearchFields, NumberSearchFields } from './SearchFields'
 import { Search, XCircle } from 'lucide-react'
 
@@ -18,6 +18,7 @@ interface BatchCardProps {
 
 export const BatchCards = ({batch, }: BatchCardProps) => {
   const [editOpen, setEditOpen] = useState<boolean>(false)
+  const [viewOpen, setViewOpen] = useState<boolean>(false)
   const [deleteOpen, setDeleteOpen] = useState<boolean>(false)
 
   const Price = Number(batch.selling_price_per_unit)
@@ -47,7 +48,7 @@ export const BatchCards = ({batch, }: BatchCardProps) => {
         <button onClick={() => setEditOpen(true)} className='px-4 py-1 bg-blue-800 hover:bg-blue-900 text-white rounded-lg cursor-pointer transition-colors'>
           Edit
         </button>
-        <button className='px-4 py-1 bg-gray-800 hover:bg-gray-900 text-white rounded-lg cursor-pointer transition-colors'>
+        <button onClick={() => setViewOpen(true)} className='px-4 py-1 bg-gray-800 hover:bg-gray-900 text-white rounded-lg cursor-pointer transition-colors'>
           View
         </button>
         <button onClick={() => setDeleteOpen(true)} className='px-4 py-1 bg-red-800 hover:bg-red-900 text-white rounded-lg cursor-pointer transition-colors'>
@@ -57,6 +58,7 @@ export const BatchCards = ({batch, }: BatchCardProps) => {
 
 
       <EditBatchDialog open={editOpen} setOpen={setEditOpen} batch={batch}/>
+      <ViewBatchDialog open={viewOpen} setOpen={setViewOpen} batch={batch}/>
       <DeleteBatchDialog open={deleteOpen} setOpen={setDeleteOpen} batch={batch}/>
     </div>
   )

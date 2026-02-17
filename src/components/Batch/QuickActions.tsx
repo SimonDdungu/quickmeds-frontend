@@ -10,6 +10,7 @@ import { useDeleteMedicine } from '@/hooks/inventory/useMedicine'
 import EditMedicine from './EditBatch'
 import { useDeleteBatch } from '@/hooks/inventory/useBatch'
 import EditBatch from './EditBatch'
+import ViewBatch from './ViewBatch'
 
 interface EditBatchDialogProps {
   open: boolean
@@ -61,6 +62,28 @@ export function EditBatchDialog({ open, setOpen, batch }: EditBatchDialogProps) 
           </DialogHeader>
 
           <EditBatch
+            defaultValues={batch ?? undefined}
+            onCancel={() => setOpen(false)}
+            onSave={() => setOpen(false)}
+          />
+        </DialogContent>
+      </Dialog>
+    </div>
+    
+  )
+}
+
+export function ViewBatchDialog({ open, setOpen, batch }: EditBatchDialogProps) {
+
+  return (
+    <div>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="!max-w-3xl ">
+          <DialogHeader>
+            <DialogTitle>View Batch</DialogTitle>
+          </DialogHeader>
+
+          <ViewBatch
             defaultValues={batch ?? undefined}
             onCancel={() => setOpen(false)}
             onSave={() => setOpen(false)}
