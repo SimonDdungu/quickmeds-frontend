@@ -6,11 +6,12 @@ import { ManufacturerSearchQuery, ManufacturersType, MedicineSearchQuery, Medici
 import {ManufacturesDummydata} from "./data"
 import { useState } from 'react'
 import { AddMedicineDialog } from './QuickActions'
-import TextSearchFields, { NumberSearchFields } from './SearchFields'
+import TextSearchFields, { NumberSearchFields, ReactNumberSearchField } from './SearchFields'
 import { Search, XCircle } from 'lucide-react'
 
 import Datatable from '../Global/Datatable'
 import { useMedicines } from '@/hooks/inventory/useMedicine'
+import { ReactNumberField } from '../Global/Form'
 
 export default function MedicineTable() {
   const [name, setName] = useState<string | undefined>(undefined)
@@ -23,7 +24,6 @@ export default function MedicineTable() {
   const [manufacturer, setManufacturer] = useState<string | undefined>(undefined)
   const [searchQuery, setSearchQuery] = useState<MedicineSearchQuery>({name: undefined, generic_name: undefined, dosage_form: undefined, strength: undefined, strength_unit: undefined, manufacturer: undefined, strength_min: undefined, strength_max: undefined});
   const [pagination, setPagination] = useState<PaginationState>({pageIndex: 0, pageSize: 10})
-
   const { data, isLoading, isError } = useMedicines({page: pagination.pageIndex + 1, ...searchQuery})
   const medicine: MedicineType[] = data?.results ?? []
   const totalItems = data?.count ?? 0
@@ -51,11 +51,11 @@ export default function MedicineTable() {
                   <TextSearchFields label='Name' name='name' value={name} onChange={setName}/>
                   <TextSearchFields label='Generic Name' name='generic_name' value={generic_name} onChange={setGeneric_name}/>
                   <TextSearchFields label='Dosage Form' name='dosage_form' value={dosage_form} onChange={setDosageForm}/>
-                  <NumberSearchFields label='Strength' name='strength' value={strength} onChange={setStrength}/>
+                  <ReactNumberSearchField label='Strength' name='strength' value={strength} onChange={setStrength}/>
                   <TextSearchFields label='Strength Unit' name='strength_unit' value={strength_unit} onChange={setStrengthUnit}/>
-                  <NumberSearchFields label='Strength Min' name='strength_min' value={strength_min} onChange={setStrengthMin}/>
+                  <ReactNumberSearchField label='Strength Min' name='strength_min' value={strength_min} onChange={setStrengthMin}/>
                   <span className='mb-1'>{"-"} </span>
-                  <NumberSearchFields label='Strength Max' name='strength_max' value={strength_max} onChange={setStrengthMax}/>
+                  <ReactNumberSearchField label='Strength Max' name='strength_max' value={strength_max} onChange={setStrengthMax}/>
                   <TextSearchFields label='Manufacturer' name='manufacturer' value={manufacturer} onChange={setManufacturer}/>
 
 

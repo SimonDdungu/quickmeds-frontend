@@ -1,4 +1,6 @@
 import React from 'react'
+import { Control, Controller } from 'react-hook-form';
+import { NumericFormat } from 'react-number-format';
 interface TextSearchField {
   label: string;
   name: string;
@@ -8,6 +10,13 @@ interface TextSearchField {
 interface NumberSearchField {
   label: string;
   name: string;
+  value?: number
+  onChange: (value: number | undefined) => void
+}
+
+interface ReactNumber {
+  label: string
+  name: string
   value?: number
   onChange: (value: number | undefined) => void
 }
@@ -30,6 +39,28 @@ export const NumberSearchFields = ({label, name, value, onChange}: NumberSearchF
         <input id={name} name={name} type="tel" value={value ?? ""} 
         onChange={(e) => /^\d*$/.test(e.target.value) && onChange(e.target.value === "" ? undefined : Number(e.target.value))}
         className='px-2 py-1 w-50 bg-white rounded-lg border border-gray-300 focus:border-blue-800 outline-none text-sm'/>
+    </div>
+  )
+}
+
+export const ReactNumberSearchField = ({ label, name, value, onChange}: ReactNumber) => {
+
+  return (
+    <div>
+      <label htmlFor={name} className="capitalize flex text-sm mb-1 font-medium text-gray-700">
+        {label}
+      </label>
+          <NumericFormat
+            value={value ?? ""}
+            thousandSeparator=","
+            decimalScale={2}
+            fixedDecimalScale={false}
+            allowNegative={false}
+            onValueChange={(values) => {
+              onChange?.(values.floatValue ?? undefined);
+            }}
+            className='px-2 py-1 w-50 bg-white rounded-lg border border-gray-300 focus:border-blue-800 outline-none text-sm'
+          /> 
     </div>
   )
 }
