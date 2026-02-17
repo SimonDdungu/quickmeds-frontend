@@ -10,6 +10,7 @@ import { useBatches } from '@/hooks/inventory/useBatch'
 import Image from 'next/image'
 import { Pagination } from '../Global'
 import LoadingSpinner from '../Global/LoadingSpinner'
+import { ReactNumberSearchField } from '../Medicine/SearchFields'
 
 interface BatchCardProps {
   batch: Partial<BatchType>
@@ -141,28 +142,26 @@ export default function Batches() {
                   <TextSearchFields label='Batch Number' name='batch_number' value={batch_number} onChange={setBatchNumber}/>
                   <TextSearchFields label='Medicine' name='medicine' value={search} onChange={setSearch}/>
                   <TextSearchFields label='Wholesaler' name='wholesaler' value={wholesaler} onChange={setWholesaler}/>
-                  <NumberSearchFields label='Purchase price' name='purchase_price' value={purchase_price} onChange={setPurchase_price}/>
-                  <NumberSearchFields label='Selling price' name='selling_price_per_unit' value={selling_price_per_unit} onChange={setSelling_price_per_unit}/>
-                  
+                  <ReactNumberSearchField label='Purchase price' name='purchase_price' value={purchase_price} onChange={setPurchase_price}/>
+                  <ReactNumberSearchField label='Selling price' name='selling_price_per_unit' value={selling_price_per_unit} onChange={setSelling_price_per_unit}/>
                   <div className='flex gap-3 items-end'>
-                  <NumberSearchFields label='Purchase price Min' name='purchase_price_minimum' value={purchase_price_minimum} onChange={setPurchase_price_minimum}/>
+                  <ReactNumberSearchField label='Purchase price Min' name='purchase_price_minimum' value={purchase_price_minimum} onChange={setPurchase_price_minimum}/>
                   <p className='mb-1'>{" - "}</p>
-                  <NumberSearchFields label='Purchase price Max' name='purchase_price_maximum' value={purchase_price_maximum} onChange={setPurchase_price_maximum}/>
-
-                  <NumberSearchFields label='Selling price Min' name='selling_price_minimum' value={selling_price_minimum} onChange={setSelling_price_minimum}/>
+                  <ReactNumberSearchField label='Purchase price Max' name='purchase_price_maximum' value={purchase_price_maximum} onChange={setPurchase_price_maximum}/>
+                  <ReactNumberSearchField label='Selling price Min' name='selling_price_minimum' value={selling_price_minimum} onChange={setSelling_price_minimum}/>
                   <p className='mb-1'>{" - "}</p>
-                  <NumberSearchFields label='Selling price Max' name='selling_price_maximum' value={selling_price_maximum} onChange={setSelling_price_maximum}/>
+                  <ReactNumberSearchField label='Selling price Max' name='selling_price_maximum' value={selling_price_maximum} onChange={setSelling_price_maximum}/>
                   </div>
 
-                  <NumberSearchFields label='Quantity received' name='quantity_received' value={quantity_received} onChange={setQuantity_received}/>
-                  <NumberSearchFields label='Quantity received Min' name='quantity_received_min' value={quantity_received_min} onChange={setQuantity_received_min}/>
+                  <ReactNumberSearchField label='Quantity received' name='quantity_received' value={quantity_received} onChange={setQuantity_received}/>
+                  <ReactNumberSearchField label='Quantity received Min' name='quantity_received_min' value={quantity_received_min} onChange={setQuantity_received_min}/>
                   <p className='mb-1'>{" - "}</p>
-                  <NumberSearchFields label='Quantity received Max' name='quantity_received_max' value={quantity_received_max} onChange={setQuantity_received_max}/>
+                  <ReactNumberSearchField label='Quantity received Max' name='quantity_received_max' value={quantity_received_max} onChange={setQuantity_received_max}/>
                   
-                  <NumberSearchFields label='Quantity remaining' name='quantity_remaining' value={quantity_remaining} onChange={setQuantity_remaining}/>
-                  <NumberSearchFields label='Quantity remaining Min' name='quantity_remaining_min' value={quantity_remaining_min} onChange={setQuantity_remaining_min}/>
+                  <ReactNumberSearchField label='Quantity remaining' name='quantity_remaining' value={quantity_remaining} onChange={setQuantity_remaining}/>
+                  <ReactNumberSearchField label='Quantity remaining Min' name='quantity_remaining_min' value={quantity_remaining_min} onChange={setQuantity_remaining_min}/>
                   <p className='mb-1'>{" - "}</p>
-                  <NumberSearchFields label='Quantity remaining Max' name='quantity_remaining_max' value={quantity_remaining_max} onChange={setQuantity_remaining_max}/>
+                  <ReactNumberSearchField label='Quantity remaining Max' name='quantity_remaining_max' value={quantity_remaining_max} onChange={setQuantity_remaining_max}/>
 
                   <DateSearchFields label='Expiry Date' name='expiry_date' value={expiry_date} onChange={setExpiry_date}/>
                   <DateSearchFields label='Expiry Date From' name='expiry_date_from' value={expiry_date_from} onChange={setExpiry_date_from}/>
