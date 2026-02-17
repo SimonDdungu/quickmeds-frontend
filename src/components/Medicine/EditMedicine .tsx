@@ -11,8 +11,8 @@ import LoadingSpinner from "../Global/LoadingSpinner"
 import { MedicineFormData, medicineSchema } from "@/schema/medicineSchema"
 import { useUpdateMedicine } from "@/hooks/inventory/useMedicine"
 import { useAddMedicine } from "@/hooks/inventory/useMedicine"
-import { useDosageForms } from "@/hooks/useDosageForms"
-import { useStrengthUnits } from "@/hooks/useStrengthUnits"
+import { useDosageForms } from "@/hooks/inventory/useDosageForms"
+import { useStrengthUnits } from "@/hooks/inventory/useStrengthUnits"
 import { useManufacturers } from "@/hooks/inventory/useManufacturers"
 
 interface EditMedicineFormProps {

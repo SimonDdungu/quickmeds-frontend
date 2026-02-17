@@ -10,8 +10,8 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { MedicineFormData, medicineSchema } from "@/schema/medicineSchema"
 import { useAddMedicine } from "@/hooks/inventory/useMedicine"
-import { useDosageForms } from "@/hooks/useDosageForms"
-import { useStrengthUnits } from "@/hooks/useStrengthUnits"
+import { useDosageForms } from "@/hooks/inventory/useDosageForms"
+import { useStrengthUnits } from "@/hooks/inventory/useStrengthUnits"
 
 
 interface AddMedicineFormProps {
