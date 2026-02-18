@@ -1,43 +1,43 @@
 'use client'
 import React from 'react'
 import { useState } from 'react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog"
-import { CreateMedicineType, MedicineType } from '@/interfaces'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { User } from '@/interfaces'
 import { Trash } from "lucide-react"
 import { toast } from 'sonner'
-import AddMedicine from './AddStaff'
-import { useDeleteMedicine } from '@/hooks/inventory/useMedicine'
 import EditMedicine from './EditStaff'
+import AddUser from './AddStaff'
+import { useDeleteUser } from '@/hooks/users/useUsers'
 
-interface EditMedicineDialogProps {
+interface EditUserDialogProps {
   open: boolean
   setOpen: (open: boolean) => void
-  medicine: CreateMedicineType | null
+  user: User | null
 }
 
-interface DeleteMedicineDialogProps {
+interface DeleteUserDialogProps {
   open: boolean
   setOpen: (open: boolean) => void
-  medicine: CreateMedicineType | null
+  user: User | null
 }
 
-export function AddMedicineDialog() {
+export function AddUserDialog() {
   const [open, setOpen] = useState(false)
 
   return (
     <div className='ml-auto'>
       <button className='cursor-pointer block w-max  px-5 py-2 rounded-lg text-white bg-blue-800 text-sm hover:bg-blue-900 transition-colors'
         onClick={() => setOpen(true)}>
-        Add Medicine
+        Create User
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-6xl ">
           <DialogHeader>
-            <DialogTitle>Add Medicine</DialogTitle>
+            <DialogTitle>Create User</DialogTitle>
           </DialogHeader>
 
-          <AddMedicine
+          <AddUser
             onCancel={() => setOpen(false)}
             onSave={() => setOpen(false)}
           />
@@ -48,7 +48,7 @@ export function AddMedicineDialog() {
 }
 
 
-export function EditMedicineDialog({ open, setOpen, medicine }: EditMedicineDialogProps) {
+export function EditUserDialog({ open, setOpen, user }: EditUserDialogProps) {
 
   return (
     <div>
@@ -59,7 +59,7 @@ export function EditMedicineDialog({ open, setOpen, medicine }: EditMedicineDial
           </DialogHeader>
 
           <EditMedicine
-            defaultValues={medicine ?? undefined}
+            defaultValues={user ?? undefined}
             onCancel={() => setOpen(false)}
             onSave={() => setOpen(false)}
           />
@@ -70,20 +70,20 @@ export function EditMedicineDialog({ open, setOpen, medicine }: EditMedicineDial
   )
 }
 
-export function DeleteMedicineDialog({ open, setOpen, medicine }: DeleteMedicineDialogProps) {
+export function DeleteUserDialog({ open, setOpen, user }: DeleteUserDialogProps) {
 
-  const deleteMedicine = useDeleteMedicine()
+  const deleteUser = useDeleteUser()
 
   const handleDelete = () => {
-    if (!medicine?.id) return
+    if (!user?.id) return
 
-     deleteMedicine.mutate(medicine.id, {
+     deleteUser.mutate(user.id, {
         onSuccess: () => {
-          toast.success("Medicine deleted successfully")
+          toast.success("User deleted successfully")
            setOpen(false)
           },
         onError: (error) => {
-          toast.error("Medicine was not deleted!")
+          toast.error("User was not deleted!")
         }
   })
 }
@@ -93,13 +93,13 @@ export function DeleteMedicineDialog({ open, setOpen, medicine }: DeleteMedicine
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>Delete Medicine</DialogTitle>
+            <DialogTitle>Delete User</DialogTitle>
           </DialogHeader>
 
           <div>
             <div className='flex gap-x-4 items-center mb-10'>
               <Trash size={26} className='text-red-500'/>
-              <p>Are you sure you want to delete this medicine?</p>
+              <p>Are you sure you want to delete this user?</p>
             </div>
               <div className="flex justify-end gap-2 mt-4">
               <button type="button" onClick={() => setOpen(false)} className="px-5 py-1 cursor-pointer rounded-lg border bg-gray-100 hover:bg-gray-200 text-sm transition-colors">

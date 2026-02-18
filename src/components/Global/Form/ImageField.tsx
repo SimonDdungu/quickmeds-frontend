@@ -5,9 +5,10 @@ import { useDropzone } from "react-dropzone";
 type Props = {
   value?: File | string;
   onChange: (file?: File) => void;
+  placeholder?: string;
 };
 
-export default function ImageField({ value, onChange }: Props) {
+export default function ImageField({ value, onChange, placeholder }: Props) {
   const { getRootProps, getInputProps } = useDropzone({ accept: { "image/*": [] }, maxFiles: 1, onDrop: (files) => onChange(files[0]) });
 
   const removeImage = () => {
@@ -16,7 +17,7 @@ export default function ImageField({ value, onChange }: Props) {
 
   return (
     <div {...getRootProps()}>
-        <p className="text-center text-sm mb-2">Select an image</p>
+        <p className="text-center text-sm mb-2">{placeholder? placeholder : "Select an image"}</p>
         <div className="border-2 border-dashed rounded p-4 text-center cursor-pointer">
             <input {...getInputProps()} />
             {value ? (

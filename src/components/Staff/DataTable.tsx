@@ -4,7 +4,7 @@ import { PaginationState} from '@tanstack/react-table'
 import {columns} from './Columns'
 import { User, UserSearchQuery } from '@/interfaces'
 import { useState } from 'react'
-import { AddMedicineDialog } from './QuickActions'
+import { AddUserDialog } from './QuickActions'
 import TextSearchFields, { ContactSearchField } from './SearchFields'
 import { Search, XCircle } from 'lucide-react'
 
@@ -52,7 +52,8 @@ export default function UserTable() {
                   <TextSearchFields label='Username' name='username' value={username} onChange={setUsername}/>
                   <TextSearchFields label='Email' name='email' value={email} onChange={setEmail}/>
                   <ContactSearchField label='Phone Number' name='phone_number' value={phone_number} onChange={setPhoneNumber}/>
-                  <GenderDropDown label='Gender' name='email' gender={gender} setGender={setGender}/>
+                  <TextSearchFields label='Gender' name='email' value={gender} onChange={setGender}/>
+                  
 
 
                   <div className='ml-5 flex gap-x-3'>
@@ -67,7 +68,7 @@ export default function UserTable() {
 
                 
               </form>
-                <AddMedicineDialog />
+                <AddUserDialog />
             </div>
             
           <Datatable data={users} columns={columns} isLoading={isLoading} pagination={pagination} setPagination={setPagination} totalItems={totalItems}/>

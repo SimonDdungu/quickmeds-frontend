@@ -10,6 +10,7 @@ interface DropdownList {
   register?: any;
   placeholder?: string;
   errors?: FieldErrors
+  control?: Control<any>;
   gender?: string | undefined;
   setGender?: (gender: string | undefined) => void;
   form?: boolean
@@ -17,17 +18,15 @@ interface DropdownList {
 
 
 
-const GenderDropDown = ({required, name, label, errors, register, gender, form=false,  setGender, placeholder = ""}: DropdownList) => {
-  
+const GenderDropDown = ({required, name, label, control, errors, register, gender, form=false,  setGender, placeholder = ""}: DropdownList) => {
+
       const error = errors?.[name]
-      const options = [ { label: "Male", value: "male" }, { label: "Female", value: "female" } ];
-        const { control } = useForm()
-      
-    const selectedOption = options.find((opt) => opt.value === gender) || null;
-    console.log("selected gender: ", selectedOption)
+      const options = [ 
+        { label: "Male", value: "male" }, 
+        { label: "Female", value: "female" } ];
     
   return (
-     <div className={`relative ${form ? "pb-2" : ""} w-40`}>
+     <div className={`relative ${form ? "pb-2" : ""} min-w-40`}>
       <label htmlFor={name} className="capitalize flex text-sm mb-1 font-medium text-gray-700">
         {label}
         {required && <span className="text-red-500 ml-1">*</span>}
@@ -38,13 +37,14 @@ const GenderDropDown = ({required, name, label, errors, register, gender, form=f
         control={control}
         render={({ field: { onChange } }) => (
                 <Select
-                  options={options ?? []}
-                  value={selectedOption}    
-                  onChange={(option) => {setGender?.(option?.value); onChange(option?.value)}}
+                  options={options ?? []}   
                   placeholder={placeholder}
+                  onChange={(selectedOption: any) => {
+                    const val = selectedOption?.value ?? null;
+                    console.log("i have selected this gender value: ", val)
+                    onChange(val);       
+                  }}
                   isClearable
-                   className="rounded-2xl"           // outer wrapper rounded
-        classNamePrefix="select" 
                 />
           )}
         />

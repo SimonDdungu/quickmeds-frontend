@@ -2,47 +2,37 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { InputField, NumberField, Dropdown, TextField, ImageField, ReactNumberField } from "../Global/Form"
-import { useManufacturers } from "@/hooks/inventory/useManufacturers"
-import { CreateMedicineType } from "@/interfaces"
+import { InputField, ImageField, ContactField } from "../Global/Form"
 import LoadingSpinner from "../Global/LoadingSpinner"
 import { useState } from "react"
 import { toast } from "sonner"
-import { MedicineFormData, medicineSchema } from "@/schema/medicineSchema"
-import { useAddMedicine } from "@/hooks/inventory/useMedicine"
-import { useDosageForms } from "@/hooks/inventory/useDosageForms"
-import { useStrengthUnits } from "@/hooks/inventory/useStrengthUnits"
+import { UserFormData, CreateUserSchema } from "@/schema/createUserSchema"
+import { useAddUser } from "@/hooks/users/useUsers"
+import GenderDropDown from "../Global/Form/GenderDropdown"
+import RolesDropDown from "../Global/Form/RolesDropDown"
+import { User } from "@/interfaces"
 
 
-interface AddMedicineFormProps {
-  defaultValues?: Partial<MedicineFormData>
+interface AddUserFormProps {
+  defaultValues?: Partial<UserFormData>
   onCancel: () => void
   onSave: () => void
 }
 
-export default function AddStaff({ defaultValues, onCancel, onSave }: AddMedicineFormProps) {
+export default function AddUser({ defaultValues, onCancel, onSave }: AddUserFormProps) {
   const [searchQuery, setSearchQuery] = useState<string | undefined>(undefined)
   const [ErrorMessage, ShowErrorMessage] = useState<boolean>(false)
   const [image, setImage] = useState<File>();
   
-  const { register, handleSubmit, control, formState: { errors } } = useForm<MedicineFormData>({
+  const { register, handleSubmit, control, formState: { errors } } = useForm<UserFormData>({
     defaultValues,
-    resolver: zodResolver(medicineSchema),
+    resolver: zodResolver(CreateUserSchema),
   })
 
-  const addMedicine = useAddMedicine();
-  const { data, isLoading, isError } = useManufacturers({ name: searchQuery})
-  const { data: dosage_forms, isLoading: dosage_loading } = useDosageForms()
-  const { data: strength_unit, isLoading: strength_unit_loading } = useStrengthUnits()
-  
-  const manufacturers = data?.results
-  const options = manufacturers?.map((m: any) => ({
-    label: m.name,
-    value: m.id,
-  }));
+  const addUser = useAddUser();
+ 
 
-
-const onSubmit = async (data: CreateMedicineType) => {
+const onSubmit = async (data: User) => {
   const formData = new FormData()
   
   Object.entries(data).forEach(([key, value]) => {
@@ -57,13 +47,13 @@ const onSubmit = async (data: CreateMedicineType) => {
 
   console.log("creating data: ", formData)
 
-    addMedicine.mutate(formData, {
+    addUser.mutate(formData, {
         onSuccess: () => {
-          toast.success("Medicine added successfully")
+          toast.success("User created successfully")
            onSave()
           },
         onError: (error) => {
-          toast.error("Medicine was not added!")
+          toast.error("User was not created!")
           ShowErrorMessage(true)
         }
   }
@@ -72,64 +62,41 @@ const onSubmit = async (data: CreateMedicineType) => {
 
   return (
       <form onSubmit={handleSubmit(onSubmit)} className="relative overflow-hidden flex flex-col gap-4 w-full mx-auto px-4 py-8 bg-white border rounded-lg shadow-sm ">
-        {addMedicine.isPending && <LoadingSpinner />}
+        {addUser.isPending && <LoadingSpinner />}
         {ErrorMessage && <p className="text-center text-red-500 text-sm absolute top-3 left-0 w-full">Sorry, something went wrong!</p>}
 
        
         <div className="flex justify-start items-center">
 
-        <div className="border-r pr-4 gap-y-4 flex flex-col">
+          <div className="border-r pr-4 gap-y-4 flex flex-col">
           
             <div className="flex flex-row gap-x-5">
-              <InputField label="Name" name="name" placeholder="Enter medicine name" register={register} errors={errors} required={true}/>
-              <InputField label="Generic Name" name="generic_name" placeholder="Enter generic name" register={register} errors={errors} />
-            <Dropdown
-              name="dosage_form"
-              label="Dosage Form"
-              control={control}
-              isLoading={dosage_loading}
-              options={dosage_forms ?? []}
-              placeholder="Select dosage Form..."
-              errors={errors}
-            />
+              <InputField required={true} label="First Name" name="first_name" placeholder="Enter first name" register={register} errors={errors} />
+              <InputField required={true} label="Last Name" name="last_name" placeholder="Enter last name" register={register} errors={errors} />
+              <InputField required={true} label="Username" name="username" placeholder="Enter username" register={register} errors={errors} />
             </div>
-
-            <Dropdown
-              required={true}
-              name="manufacturer"
-              label="Manufacturer"
-              control={control}
-              options={options ?? []}
-              isLoading={isLoading}
-              onSearch={setSearchQuery}
-              placeholder="Select a Manufacturer..."
-              errors={errors}
-            />
-
 
             <div className="flex flex-row gap-x-5">
-              <ReactNumberField control={control} label="Strength" name="strength" placeholder="Enter strength" register={register} errors={errors}/>
-              <Dropdown
-                name="strength_unit"
-                label="Strength Unit"
-                control={control}
-                options={strength_unit ?? []}
-                isLoading={strength_unit_loading}
-                placeholder="Select strength unit..."
-              />
+              <InputField label="Email" name="email" placeholder="Enter email" register={register} errors={errors} />
+              <ContactField label="Phone Number" name="phone_number" placeholder="Enter phone number" register={register} errors={errors} />
             </div>
 
-            
-
-            <TextField label="Description" name="description" placeholder="Enter description of the medicine..." register={register} errors={errors} />
-
+            <div className="flex flex-row gap-x-5">
+              <GenderDropDown control={control} required={true} label="Gender" placeholder="Select a gender" name="gender" errors={errors}/>
+              <RolesDropDown required={true} label="Role" name="group" placeholder="Select a role" control={control} register={register} errors={errors}/>
             </div>
-        
+
+            <InputField required={true} label="Password" name="password" placeholder="Enter password" register={register} errors={errors} />
+            <InputField required={true} label="Confirm Password" name="confirmPassword" placeholder="Enter password again" register={register} errors={errors} />
+
+          </div>
 
             <div className="mx-auto">
-                 <ImageField value={image} onChange={setImage}/>
+                 <ImageField value={image} onChange={setImage} placeholder="Select a profile picture"/>
             </div>
 
+        
+        
         </div>
         
         {/* <Dropdown onSearch={setSearchQuery} onSelect={setSelectedId} placeholder="Select a Manufacturer" options={options ?? []} value={selectedOption}/> */}
@@ -138,10 +105,12 @@ const onSubmit = async (data: CreateMedicineType) => {
           <button type="button" onClick={onCancel} className="px-5 py-1 cursor-pointer rounded-lg border bg-gray-100 hover:bg-gray-200 text-sm transition-colors">
             Cancel
           </button>
-          <button type="submit" disabled={addMedicine.isPending} className="px-5 py-1 cursor-pointer rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm transition-colors">
+          <button type="submit" disabled={addUser.isPending} className="px-5 py-1 cursor-pointer rounded-lg bg-blue-600 text-white hover:bg-blue-700 text-sm transition-colors">
             Save
           </button>
         </div>
+
+
         
       </form>
   )

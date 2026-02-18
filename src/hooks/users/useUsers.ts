@@ -4,6 +4,7 @@ import { UserSearchQuery, User, PaginatedResponse } from "@/interfaces"
 import { env } from "@/config/env"
 
 const usersAPI = env.usersApi
+const rolesAPI = env.rolesApi
 
 export function useUsers(params: UserSearchQuery) {
   return useQuery({
@@ -27,11 +28,11 @@ export function useUser(id: string) {
   })
 }
 
-export function useAddBatch() {
+export function useAddUser() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (data: User) => {
+    mutationFn: async (data: FormData) => {
       const res = await api.post<User>(`${usersAPI}/`, data)
       return res.data
     },
@@ -66,5 +67,16 @@ export function useDeleteUser() {
       queryClient.invalidateQueries({ queryKey: ["users"] })
       queryClient.invalidateQueries({ queryKey: ["user", id] })
     },
+  })
+}
+
+export function useUserRoles() {
+  return useQuery({
+    queryKey: ["roles"], 
+    queryFn: async () => {
+      const res = await api.get(`${usersAPI}/${rolesAPI}/`)
+      return res.data          
+    },
+    staleTime: 1000 * 60 * 60,
   })
 }

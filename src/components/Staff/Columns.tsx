@@ -41,6 +41,11 @@ export const columns: ColumnDef<User>[] = [
     enableSorting: true,
   },
   {
+    accessorKey: 'groups',
+    header: ({ column }) => <SortableHeader column={column} title="Role" />,
+    enableSorting: true,
+  },
+  {
     accessorKey: 'created_at',
     header: ({ column }) => <SortableHeader column={column} title="Created At" />,
     enableSorting: true,

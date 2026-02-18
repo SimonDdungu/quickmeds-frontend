@@ -4,9 +4,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { CreateMedicineType, MedicineType } from "@/interfaces"
+import { CreateMedicineType, MedicineType, User } from "@/interfaces"
 import { useState } from "react"
-import { DeleteMedicineDialog, EditMedicineDialog } from "./QuickActions"
+import { DeleteUserDialog, EditUserDialog } from "./QuickActions"
 
 interface ActionMenuProps {
   rowData: any
@@ -15,7 +15,7 @@ interface ActionMenuProps {
 export const ActionsButton = ({ rowData }: ActionMenuProps) => {
     const [editOpen, setEditOpen] = useState(false)
     const [deleteOpen, setDeleteOpen] = useState(false)
-    const [selectedMedicine, setSelectedMedicine] = useState<CreateMedicineType | null>(null)
+    const [selectedUser, setSelectedUser] = useState<User | null>(null)
 return (
     <div>
         <Popover>
@@ -31,20 +31,20 @@ return (
                 className="w-32 p-2 flex flex-col gap-1">
                 <button
                 className="text-sm text-blue-600 hover:bg-blue-50 rounded px-2 py-1 text-left cursor-pointer"
-                onClick={() => {setEditOpen(true); setSelectedMedicine(rowData);} }>
+                onClick={() => {setEditOpen(true); setSelectedUser(rowData);} }>
                     Edit
                 </button>
 
                 <button
                 className="text-sm text-red-600 hover:bg-red-50 rounded px-2 py-1 text-left cursor-pointer"
-                onClick={() => {setDeleteOpen(true); setSelectedMedicine(rowData);}}>
+                onClick={() => {setDeleteOpen(true); setSelectedUser(rowData);}}>
                     Delete
                 </button>
             </PopoverContent>
         </Popover>
 
-         <EditMedicineDialog open={editOpen} setOpen={setEditOpen}  medicine={selectedMedicine}/>
-         <DeleteMedicineDialog open={deleteOpen} setOpen={setDeleteOpen}  medicine={selectedMedicine}/>
+         <EditUserDialog open={editOpen} setOpen={setEditOpen}  user={selectedUser}/>
+         <DeleteUserDialog open={deleteOpen} setOpen={setDeleteOpen}  user={selectedUser}/>
     </div>
     )
 }
