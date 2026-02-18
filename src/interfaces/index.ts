@@ -144,3 +144,27 @@ export type BatchSearchQuery = {
   expiry_date_from?: string
   expiry_date_to?: string
 }
+
+export type User = {
+  id?: string
+  username: string
+  first_name: string
+  last_name: string
+  email?: string
+  profile_image?: File | string | null
+  phone_number?: string
+  gender?: "male" | "female"
+  created_at?: string
+  updated_at?: string
+}
+
+export type UserSearchQuery = {
+  page?: number
+  search?: string
+  first_name?: string
+  last_name?: string
+  username?: string
+  email?: string
+  phone_number?: string
+  gender?: "male" | "female" | string | null
+}

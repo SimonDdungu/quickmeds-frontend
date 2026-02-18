@@ -1,43 +1,43 @@
 'use client'
 
 import { ColumnDef } from '@tanstack/react-table'
-import { MedicineType } from '@/interfaces'
+import {  User } from '@/interfaces'
 import { ActionsButton } from './ActionsButton'
 import { format, parseISO } from "date-fns";
 import SortableHeader from '../Global/SortableHeader'
 
-export const columns: ColumnDef<MedicineType>[] = [
+export const columns: ColumnDef<User>[] = [
   {
-    accessorKey: 'name',
-    header: ({ column }) => <SortableHeader column={column} title="Name" />,
+    accessorKey: 'first_name',
+    header: ({ column }) => <SortableHeader column={column} title="First Name" />,
     enableSorting: true,
   },
   {
-    accessorKey: 'generic_name',
-    header: ({ column }) => <SortableHeader column={column} title="Generic Name" />,
+    accessorKey: 'last_name',
+    header: ({ column }) => <SortableHeader column={column} title="Last Name" />,
     enableSorting: true,
   },
   {
-    accessorKey: 'dosage_form',
-    header: ({ column }) => <SortableHeader column={column} title="Dosage Form" />,
+    accessorKey: 'username',
+    header: ({ column }) => <SortableHeader column={column} title="Username" />,
     enableSorting: true,
   },
   {
-    accessorKey: 'strength',
-    header: ({ column }) => <SortableHeader column={column} title="Strength" />,
+    accessorKey: 'email',
+    header: 'Email',
+  },
+  {
+    accessorKey: 'phone_number',
+    header: 'Phone Number',
+  },
+  {
+    accessorKey: 'gender',
+    header: ({ column }) => <SortableHeader column={column} title="Gender" />,
     enableSorting: true,
   },
   {
-    accessorKey: 'strength_unit',
-    header: 'Strength Unit',
-  },
-    {
-    accessorKey: 'description',
-    header: 'Description',
-  },
-    {
-    accessorKey: 'manufacturer_detail.name',
-    header: ({ column }) => <SortableHeader column={column} title="Manufacturer" />,
+    accessorKey: 'is_active',
+    header: ({ column }) => <SortableHeader column={column} title="Active" />,
     enableSorting: true,
   },
   {
@@ -48,7 +48,7 @@ export const columns: ColumnDef<MedicineType>[] = [
       const backendDate = row.original.created_at;
       if (!backendDate) return "-"; 
       const date = parseISO(backendDate);
-      return format(date, "MMM dd, yyyy HH:mm"); // e.g., Jan 26, 2026 07:24
+      return format(date, "MMM dd, yyyy HH:mm");
     },
   },
   {
@@ -59,7 +59,7 @@ export const columns: ColumnDef<MedicineType>[] = [
       const backendDate = row.original.updated_at;
       if (!backendDate) return "-"; 
       const date = parseISO(backendDate);
-      return format(date, "MMM dd, yyyy HH:mm"); // e.g., Jan 26, 2026 07:24
+      return format(date, "MMM dd, yyyy HH:mm"); 
     },
   },
   {

@@ -1,8 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 import { api } from "@/lib/axios"
 import { PaginatedResponse, WholesalerSearchQuery, WholesalerType } from "@/interfaces"
+import { env } from "@/config/env"
 
-const inventoryAPI = process.env.NEXT_PUBLIC_INVENTORY_API
+const inventoryAPI = env.inventoryApi
 
 export function useWholesalers(params: WholesalerSearchQuery) {
   return useQuery({

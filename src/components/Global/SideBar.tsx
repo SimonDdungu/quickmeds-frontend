@@ -31,7 +31,7 @@ const SideBarNav: SidebarLink[]  = [
     {link_name: "Reports", link: "#", icon: Reports_icon},
     {link_name: "Administration", icon: Admin_icon,
         options: [
-            {link_name: "Staff", link: "#"},
+            {link_name: "Staff", link: "staff"},
             {link_name: "Roles", link: "#"},
         ]
     },

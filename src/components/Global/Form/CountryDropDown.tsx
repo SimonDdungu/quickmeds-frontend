@@ -48,16 +48,6 @@ const CountryDropDown = ({required, name, label, control, errors, register, onSe
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      {/* <select {...register(name)} className={`w-full border rounded px-3 py-2 text-sm focus:border-blue-800 outline-none ${error ? "border-red-500" : "border-gray-300"}`}
-        defaultValue="">
-            <option value="">Select a country</option>
-                    {countries.map(c => (
-                        <option key={c.value} value={c.value}>{c.country}</option>
-                    ))}
-      </select>
-      {error && <p className="text-red-500 text-sm absolute bottom">{error.message?.toString()}</p>} */}
-
-
       <Controller
         name={name}
         control={control}

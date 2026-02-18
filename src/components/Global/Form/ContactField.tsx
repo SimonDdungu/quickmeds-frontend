@@ -21,7 +21,7 @@ export default function ContactField({ label, required, name, placeholder, regis
         {required && <span className="text-red-500 ml-1">*</span>}
       </label>
 
-      <input
+      <input 
         id={name}
         type="text"
         placeholder={placeholder}

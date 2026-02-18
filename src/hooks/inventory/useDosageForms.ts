@@ -1,7 +1,8 @@
 import { api } from "@/lib/axios";
 import { useQuery } from "@tanstack/react-query";
+import { env } from "@/config/env"
 
-const inventoryAPI = process.env.NEXT_PUBLIC_INVENTORY_API
+const inventoryAPI = env.inventoryApi
 
 export function useDosageForms() {
     
