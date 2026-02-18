@@ -50,7 +50,7 @@ const onSubmit = async (data: User) => {
 
   if(image && image instanceof File){
     formData.append("image", image)
-  }data
+  }
 
   console.log("Updated Data: ", formData)
 
