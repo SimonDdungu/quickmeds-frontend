@@ -7,9 +7,10 @@ export const CreateUserSchema = zod.object({
   username: zod.string().nonempty({ message: "Username is required" }).max(100, { message: "Username must be at most 100 characters" }),
   email: zod.email({ message: "Invalid email address" }).or(zod.literal("")),
   gender: zod.string().nonempty({error: "Please select a gender"}),
-  group: zod.string().nonempty({error: "Please select a role"}),
+  role: zod.string().nonempty({error: "Please select a role"}),
   phone_number: zod.string().max(15, { message: "Phone Number must be at most 15 characters" }).optional(),
   profile_image: zod.union([zod.instanceof(File), zod.string()]).nullable().optional(),
+  is_active: zod.boolean({error: "Invalid Choice"}),
   password: zod.string().nonempty({error: "Password is required"})
   .min(8, "Password must be at least 8 characters")
   .max(64, "Password cannot be longer than 64 characters")

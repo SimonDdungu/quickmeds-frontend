@@ -55,7 +55,7 @@ export function EditUserDialog({ open, setOpen, user }: EditUserDialogProps) {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="!max-w-6xl ">
           <DialogHeader>
-            <DialogTitle>Edit Medicine</DialogTitle>
+            <DialogTitle>Edit User</DialogTitle>
           </DialogHeader>
 
           <EditMedicine

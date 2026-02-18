@@ -5,8 +5,9 @@ export const EditUserSchema = zod.object({
   last_name: zod.string().nonempty({ message: "Last Name is required" }).max(100, { message: "Last Name must be at most 100 characters" }),
   username: zod.string().nonempty({ message: "Username is required" }).max(100, { message: "Username must be at most 100 characters" }),
   email: zod.email({ message: "Invalid email address" }).or(zod.literal("")),
-  gender: zod.enum(["male", "female"]),
-  group: zod.string().nonempty({error: "Please select a role"}),
+  gender: zod.string().nonempty({error: "Please select a gender"}),
+  role: zod.string().nonempty({error: "Please select a role"}),
+  is_active: zod.boolean({error: "Invalid Choice"}),
   phone_number: zod.string().max(15, { message: "Phone Number must be at most 15 characters" }).optional(),
   profile_image: zod.union([zod.instanceof(File), zod.string()]).nullable().optional(),
 })

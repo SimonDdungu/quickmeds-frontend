@@ -18,12 +18,12 @@ interface DropdownList {
 
 
 
-const GenderDropDown = ({required, name, label, control, errors, register, gender, form=false,  setGender, placeholder = ""}: DropdownList) => {
+const IsActiveDropDown = ({required, name, label, control, errors, register, gender, form=false,  setGender, placeholder = ""}: DropdownList) => {
 
       const error = errors?.[name]
       const options = [ 
-        { label: "Male", value: "male" }, 
-        { label: "Female", value: "female" } ];
+        { label: "Active", value: true }, 
+        { label: "Not Active", value: false } ];
     
   return (
      <div className={`relative ${form ? "pb-2" : ""} min-w-40`}>
@@ -41,7 +41,7 @@ const GenderDropDown = ({required, name, label, control, errors, register, gende
                   placeholder={placeholder}
                   onChange={(selectedOption: any) => {
                     const val = selectedOption?.value ?? null;
-                    console.log("i have selected this gender value: ", val)
+
                     onChange(val);       
                   }}
                   isClearable
@@ -55,4 +55,4 @@ const GenderDropDown = ({required, name, label, control, errors, register, gende
   )
 }
 
-export default GenderDropDown
+export default IsActiveDropDown

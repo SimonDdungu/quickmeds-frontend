@@ -47,7 +47,7 @@ const RolesDropDown = ({required, name, label, control, errors, register, onSele
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange } }) => (
+        render={({ field: { onChange, value } }) => (
                 <Select
                   options={options ?? []}
                   isLoading={isLoading} 
@@ -57,6 +57,7 @@ const RolesDropDown = ({required, name, label, control, errors, register, onSele
                   }}
                   placeholder={placeholder || "Select an option"}
                   isClearable
+                  defaultValue={options?.find((option: any) => option.value === value) ?? null}
                 />
           )}
         />

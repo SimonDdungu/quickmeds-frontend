@@ -153,7 +153,10 @@ export type User = {
   email?: string
   profile_image?: File | string | null
   phone_number?: string
+  password?: string
   gender?: string
+  role?: string
+  groups?: string
   created_at?: string
   updated_at?: string
 }

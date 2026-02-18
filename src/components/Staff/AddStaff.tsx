@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { InputField, ImageField, ContactField } from "../Global/Form"
+import { InputField, ImageField, ContactField, PasswordField } from "../Global/Form"
 import LoadingSpinner from "../Global/LoadingSpinner"
 import { useState } from "react"
 import { toast } from "sonner"
@@ -11,6 +11,7 @@ import { useAddUser } from "@/hooks/users/useUsers"
 import GenderDropDown from "../Global/Form/GenderDropdown"
 import RolesDropDown from "../Global/Form/RolesDropDown"
 import { User } from "@/interfaces"
+import IsActiveDropDown from "../Global/Form/Is_ActiveDropDown"
 
 
 interface AddUserFormProps {
@@ -83,11 +84,12 @@ const onSubmit = async (data: User) => {
 
             <div className="flex flex-row gap-x-5">
               <GenderDropDown control={control} required={true} label="Gender" placeholder="Select a gender" name="gender" errors={errors}/>
-              <RolesDropDown required={true} label="Role" name="group" placeholder="Select a role" control={control} register={register} errors={errors}/>
+              <RolesDropDown required={true} label="Role" name="role" placeholder="Select a role" control={control} register={register} errors={errors}/>
+              <IsActiveDropDown required={true} label="Status" name="is_active" placeholder="Select a status" control={control} register={register} errors={errors}/>
             </div>
 
-            <InputField required={true} label="Password" name="password" placeholder="Enter password" register={register} errors={errors} />
-            <InputField required={true} label="Confirm Password" name="confirmPassword" placeholder="Enter password again" register={register} errors={errors} />
+            <PasswordField required={true} label="Password" name="password" placeholder="Enter password" register={register} errors={errors} />
+            <PasswordField required={true} label="Confirm Password" name="confirmPassword" placeholder="Enter password again" register={register} errors={errors} />
 
           </div>
 
